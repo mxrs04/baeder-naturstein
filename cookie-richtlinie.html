@@ -41,13 +41,52 @@
             </div>
         </div>
 
-        <main class="max-w-5xl mx-auto px-4 py-16">
-            <h1 class="text-4xl text-[#6085a5] font-light mb-8">Cookie-Richtlinie</h1>
-            <div class="p-8 bg-gray-50 border border-gray-200 rounded-lg text-gray-600 space-y-4">
-                <h2 class="text-xl font-semibold text-[#6085a5]">Verwendung von Cookies</h2>
-                <p class="text-sm leading-relaxed">
-                    Unsere Website verwendet ausschließlich technisch notwendige Cookies, um die Grundfunktionen der Website zu gewährleisten.
-                </p>
+        <main class="max-w-xl mx-auto px-4 py-12">
+            <h1 class="text-3xl font-bold text-gray-700 mb-4">Unbedingt erforderlich</h1>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                Unbedingt erforderliche Cookies ermöglichen grundlegende Funktionen und sind für die einwandfreie Funktion der Website erforderlich. Daher kann man sie nicht deaktivieren. Diese Art von Cookies wird ausschließlich von dem Betreiber der Website verwendet (First-Party-Cookie) und...
+            </p>
+
+            <!-- Top Toggle Bar -->
+            <div class="bg-slate-100/70 p-4 rounded-xl flex items-center justify-between mb-4 border border-slate-200/50">
+                <div class="flex items-center gap-4">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked disabled class="sr-only peer">
+                        <div class="w-14 h-8 bg-sky-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all"></div>
+                    </label>
+                    <span class="font-medium text-gray-700 text-sm">Alle zulassen</span>
+                </div>
+            </div>
+
+            <!-- Cookie Detail Card -->
+            <div class="bg-slate-100/70 p-6 rounded-2xl border border-slate-200/50 mb-8 space-y-4">
+                <div class="flex items-center gap-4 mb-2">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked disabled class="sr-only peer">
+                        <div class="w-14 h-8 bg-sky-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all"></div>
+                    </label>
+                    <span class="font-semibold text-gray-800 text-lg">cookielaw</span>
+                </div>
+
+                <div class="text-sm text-gray-600 space-y-3">
+                    <p class="font-medium text-gray-700">Cookielaw</p>
+                    <p>Dieses Cookie zeigt das Cookie-Banner an und speichert die Cookie-Einstellungen des Besuchers.</p>
+                    
+                    <div class="pt-2 space-y-1">
+                        <p><span class="font-medium text-gray-700">Anbieter:</span><br>Jimdo GmbH, Stresemannstrasse 375, 22761 Hamburg, Deutschland.</p>
+                        <p><span class="font-medium text-gray-700">Cookie-Name:</span> ckies_cookielaw</p>
+                        <p><span class="font-medium text-gray-700">Cookie-Laufzeit:</span> 1 Jahr</p>
+                        <p><span class="font-medium text-gray-700">Datenschutzerklärung:</span><br><a href="https://www.jimdo.com/de/info/datenschutzerklaerung" target="_blank" class="text-sky-600 hover:underline break-all">https://www.jimdo.com/de/info/datenschutzerklaerung</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="flex justify-center">
+                <a href="index.html" class="w-full text-center border-2 border-slate-300 text-gray-700 font-medium px-8 py-3 rounded-2xl hover:bg-slate-50 transition-colors flex items-center justify-center gap-3 shadow-sm">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Speichern und zurück
+                </a>
             </div>
         </main>
     </div>
