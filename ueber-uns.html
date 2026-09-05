@@ -34,13 +34,12 @@
 
     <!-- Side Menu Drawer (Golden Schnitt links, Hellblau mit weißer Schrift) -->
     <div id="full-menu" class="fixed top-0 left-0 bottom-0 z-50 w-full sm:w-[80vw] md:w-[38vw] min-w-[300px] max-w-md bg-[#6085a5] text-white hidden flex-col justify-between p-6 sm:p-8 overflow-y-auto shadow-2xl transition-all duration-300">
-        <div class="flex items-center justify-between pb-6 border-b border-white/20">
+        <div class="flex items-center justify-start pb-6 border-b border-white/20">
             <button onclick="closeMenu()" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors focus:outline-none" aria-label="Menü schließen">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
-            <img class="h-8 sm:h-10 w-auto brightness-0 invert opacity-90" src="assets/logo.png" alt="Bäder Logo">
         </div>
 
         <div class="my-auto py-6 flex flex-col space-y-4 sm:space-y-5 text-lg sm:text-xl font-bold uppercase tracking-wider text-white">
@@ -117,6 +116,186 @@
             }
             document.body.style.overflow = '';
         }
+
+        /* --- Chatbot Widget Controller (Modular) --- */
+        function toggleChatbot() {
+            const win = document.getElementById('chat-window');
+            const openIcon = document.getElementById('chat-icon-open');
+            const closeIcon = document.getElementById('chat-icon-close');
+            
+            if (win.classList.contains('hidden')) {
+                win.classList.remove('hidden');
+                setTimeout(() => {
+                    win.classList.remove('scale-95', 'opacity-0');
+                    win.classList.add('scale-100', 'opacity-100');
+                }, 10);
+                openIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                document.getElementById('chat-input')?.focus();
+            } else {
+                win.classList.remove('scale-100', 'opacity-100');
+                win.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    win.classList.add('hidden');
+                }, 200);
+                openIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        }
+
+        function sendQuickReply(text) {
+            appendUserMessage(text);
+            processBotReply(text);
+        }
+
+        function handleChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+            input.value = '';
+            appendUserMessage(text);
+            processBotReply(text);
+        }
+
+        function appendUserMessage(text) {
+            const msgContainer = document.getElementById('chat-messages');
+            const userDiv = document.createElement('div');
+            userDiv.className = 'flex items-end justify-end space-x-2 pt-2';
+            userDiv.innerHTML = `
+                <div class="bg-[#6085a5] text-white p-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%] text-xs sm:text-sm">
+                    ${escapeHtml(text)}
+                </div>
+            `;
+            msgContainer.appendChild(userDiv);
+            msgContainer.scrollTop = msgContainer.scrollHeight;
+        }
+
+        function processBotReply(userQuery) {
+            const msgContainer = document.getElementById('chat-messages');
+            
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'bot-typing';
+            typingDiv.className = 'flex items-start space-x-2 pt-2';
+            typingDiv.innerHTML = `
+                <div class="w-7 h-7 rounded-full bg-[#6085a5] text-white flex items-center justify-center text-xs flex-shrink-0 font-bold">B</div>
+                <div class="bg-white border border-gray-100 p-3 rounded-2xl rounded-tl-none text-gray-400 shadow-sm flex items-center space-x-1">
+                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></span>
+                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                </div>
+            `;
+            msgContainer.appendChild(typingDiv);
+            msgContainer.scrollTop = msgContainer.scrollHeight;
+
+            setTimeout(() => {
+                document.getElementById('bot-typing')?.remove();
+                
+                let replyText = getDummyBotResponse(userQuery);
+                
+                const botDiv = document.createElement('div');
+                botDiv.className = 'flex items-start space-x-2 pt-2';
+                botDiv.innerHTML = `
+                    <div class="w-7 h-7 rounded-full bg-[#6085a5] text-white flex items-center justify-center text-xs flex-shrink-0 font-bold">B</div>
+                    <div class="bg-white border border-gray-100 p-3 rounded-2xl rounded-tl-none text-gray-700 shadow-sm max-w-[85%] text-xs sm:text-sm leading-relaxed">
+                        ${replyText}
+                    </div>
+                `;
+                msgContainer.appendChild(botDiv);
+                msgContainer.scrollTop = msgContainer.scrollHeight;
+            }, 700);
+        }
+
+        function getDummyBotResponse(query) {
+            const q = query.toLowerCase();
+            if (q.includes('öffnungszeit') || q.includes('zeit') || q.includes('standort') || q.includes('wo') || q.includes('anfahrt')) {
+                return "📍 <strong>Standort & Öffnungszeiten:</strong><br>In den Weiden 24, 73776 Altbach.<br>Mo–Fr: 08:00 – 17:00 Uhr.<br>Tel: +49 7153 8313-0";
+            }
+            if (q.includes('material') || q.includes('naturstein') || q.includes('dekton') || q.includes('neolith') || q.includes('laminam') || q.includes('glas')) {
+                return "🪨 Wir führen hochwertigen Naturstein, Vetroplan Glasrückfronten, Dekton, Neolith Keramik & Laminam. Nutzen Sie unser Hauptmenü für Detailinfos!";
+            }
+            if (q.includes('preis') || q.includes('kosten') || q.includes('angebot')) {
+                return "📄 Unsere Preislisten für 2025/26 stehen auf unserer <a href='download-preislisten.html' class='text-[#6085a5] underline font-semibold'>Download-Seite</a> bereit!";
+            }
+            if (q.includes('kontakt') || q.includes('telefon') || q.includes('mail') || q.includes('anfragen')) {
+                return "✉️ E-Mail: <a href='mailto:info@natursteinwerk-baeder.de' class='text-[#6085a5] underline'>info@natursteinwerk-baeder.de</a><br>Telefon: <strong>+49 7153 8313-0</strong>";
+            }
+            return "Vielen Dank für Ihre Nachricht! Dies ist eine Vorschau unseres KI-Assistenten. Bei allen Fragen stehen wir Ihnen telefonisch (+49 7153 8313-0) oder per E-Mail gerne zur Verfügung.";
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>"']/g, function(m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+            });
+        }
     </script>
+
+    <!-- Chatbot Widget Systemweit -->
+    <div id="chatbot-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <!-- Chat Window -->
+        <div id="chat-window" class="hidden w-[90vw] sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden mb-4 transition-all duration-300 transform scale-95 origin-bottom-right opacity-0">
+            <!-- Chat Header -->
+            <div class="bg-[#6085a5] text-white p-4 flex items-center justify-between shadow-md">
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm">
+                            💬
+                        </div>
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-[#6085a5] rounded-full"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-sm leading-tight">Bäder Assistenz</h3>
+                        <p class="text-[11px] text-white/80">Online | Schnelle Hilfe</p>
+                    </div>
+                </div>
+                <button onclick="toggleChatbot()" class="text-white/80 hover:text-white p-1 focus:outline-none transition-colors" aria-label="Chat schließen">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Messages Container -->
+            <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-3 bg-slate-50 text-xs sm:text-sm">
+                <div class="flex items-start space-x-2">
+                    <div class="w-7 h-7 rounded-full bg-[#6085a5] text-white flex items-center justify-center text-xs flex-shrink-0 font-bold">
+                        B
+                    </div>
+                    <div class="bg-white border border-gray-100 p-3 rounded-2xl rounded-tl-none text-gray-700 shadow-sm max-w-[85%] leading-relaxed">
+                        Guten Tag! 👋 Willkommen bei Eberhard Bäder Natursteine & Glas. Wie kann ich Ihnen heute weiterhelfen?
+                    </div>
+                </div>
+
+                <div id="chat-suggestions" class="flex flex-wrap gap-1.5 pt-1 pl-9">
+                    <button onclick="sendQuickReply('Öffnungszeiten & Standort')" class="bg-white hover:bg-sky-50 text-[#6085a5] border border-[#6085a5]/30 px-2.5 py-1 rounded-full text-xs font-medium transition-colors shadow-xs">📍 Öffnungszeiten</button>
+                    <button onclick="sendQuickReply('Materialberatung')" class="bg-white hover:bg-sky-50 text-[#6085a5] border border-[#6085a5]/30 px-2.5 py-1 rounded-full text-xs font-medium transition-colors shadow-xs">🪨 Materialien</button>
+                    <button onclick="sendQuickReply('Preisliste 2025/26')" class="bg-white hover:bg-sky-50 text-[#6085a5] border border-[#6085a5]/30 px-2.5 py-1 rounded-full text-xs font-medium transition-colors shadow-xs">📄 Preislisten</button>
+                    <button onclick="sendQuickReply('Kontakt')" class="bg-white hover:bg-sky-50 text-[#6085a5] border border-[#6085a5]/30 px-2.5 py-1 rounded-full text-xs font-medium transition-colors shadow-xs">✉️ Kontakt</button>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <form id="chat-form" onsubmit="handleChatSubmit(event)" class="p-3 bg-white border-t border-gray-100 flex items-center gap-2">
+                <input type="text" id="chat-input" placeholder="Ihre Frage eintippen..." class="flex-1 text-xs sm:text-sm px-3 py-2 border border-gray-200 rounded-full focus:outline-none focus:border-[#6085a5] bg-gray-50 focus:bg-white transition-colors" autocomplete="off">
+                <button type="submit" class="w-8 h-8 rounded-full bg-[#6085a5] hover:bg-[#4d6c87] text-white flex items-center justify-center flex-shrink-0 transition-colors focus:outline-none shadow">
+                    <svg class="w-4 h-4 transform rotate-90" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <!-- Floating Chat Button -->
+        <button onclick="toggleChatbot()" id="chat-toggle-btn" class="w-14 h-14 rounded-full bg-[#6085a5] hover:bg-[#4d6c87] text-white shadow-xl flex items-center justify-center transition-transform hover:scale-105 active:scale-95 focus:outline-none group relative" aria-label="Chat öffnen">
+            <svg id="chat-icon-open" class="w-6 h-6 transition-transform group-hover:rotate-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            <svg id="chat-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-400 border-2 border-white rounded-full"></span>
+        </button>
+    </div>
+</body>
 </body>
 </html>
