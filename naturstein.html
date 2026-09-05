@@ -281,19 +281,19 @@
 
         function getDummyBotResponse(query) {
             const q = query.toLowerCase();
-            if (q.includes('öffnungszeit') || q.includes('zeit') || q.includes('standort') || q.includes('wo') || q.includes('anfahrt')) {
-                return "📍 <strong>Standort & Öffnungszeiten:</strong><br>In den Weiden 24, 73776 Altbach.<br>Mo–Fr: 08:00 – 17:00 Uhr.<br>Tel: +49 7153 8313-0";
+            if (q.includes('öffnungszeit') || q.includes('zeit') || q.includes('standort') || q.includes('wo') || q.includes('anfahrt') || q.includes('geöffnet') || q.includes('wann')) {
+                return "📍 <strong>Standort & Geschäftszeiten:</strong><br>Eberhard Bäder Natursteine und Glas GmbH & Co. KG<br>In den Weiden 24, 73776 Altbach<br><br>🕒 <strong>Öffnungszeiten:</strong><br>• Mo – Mi: 08:00 – 12:20 & 13:00 – 17:00 Uhr<br>• <strong>Donnerstag:</strong> 08:00 – 12:20 & 13:00 – 18:00 Uhr<br>• Fr: 08:00 – 12:20 & 13:00 – 17:00 Uhr<br><br>📞 Tel: +49 7153 8313-0";
             }
-            if (q.includes('material') || q.includes('naturstein') || q.includes('dekton') || q.includes('neolith') || q.includes('laminam') || q.includes('glas')) {
-                return "🪨 Wir führen hochwertigen Naturstein, Vetroplan Glasrückfronten, Dekton, Neolith Keramik & Laminam. Nutzen Sie unser Hauptmenü für Detailinfos!";
+            if (q.includes('preis') || q.includes('kosten') || q.includes('angebot') || q.includes('tarif') || q.includes('aufmaß') || q.includes('montage') || q.includes('lieferung') || q.includes('rabatt') || q.includes('aktion')) {
+                return "📄 <strong>Auszug aus der Preisliste 2025/26:</strong><br>• <strong>Aufmaß & CAD:</strong> 110 € (bis 3m²), 89 € (bis 5m²), 75 € (>5m²)<br>• <strong>Montage:</strong> 226 € (bis 3m²), 194,50 € (bis 5m²), 160 € (>5m²)<br>• <strong>Lieferung:</strong> Regional 34 €, Überregional 76,50 €<br>• <strong>Natursteine:</strong> ab 247 €/m² (z.B. Rosa Beta)<br>• <strong>Vetroplan Glas:</strong> ab 251 €/m²<br>• <strong>Dekton Keramik:</strong> ab 517 €/m² (Aktionspreise!)<br>• <strong>Neolith EASY Aktion:</strong> 500 € Gutschrift bei 5 Platten!<br><br>Details auf der <a href='download-preislisten.html' class='text-[#6085a5] underline font-semibold'>Download-Seite</a>.";
             }
-            if (q.includes('preis') || q.includes('kosten') || q.includes('angebot')) {
-                return "📄 Unsere Preislisten für 2025/26 stehen auf unserer <a href='download-preislisten.html' class='text-[#6085a5] underline font-semibold'>Download-Seite</a> bereit!";
+            if (q.includes('material') || q.includes('naturstein') || q.includes('dekton') || q.includes('neolith') || q.includes('laminam') || q.includes('glas') || q.includes('granit')) {
+                return "🪨 Wir führen über 80 Natursteine (Granit, Marmor), Vetroplan Glasrückwände & Arbeitsplatten, Dekton, Neolith Keramik, SapienStone & Laminam. Schauen Sie in unser Hauptmenü für Detailkataloge!";
             }
-            if (q.includes('kontakt') || q.includes('telefon') || q.includes('mail') || q.includes('anfragen')) {
-                return "✉️ E-Mail: <a href='mailto:info@natursteinwerk-baeder.de' class='text-[#6085a5] underline'>info@natursteinwerk-baeder.de</a><br>Telefon: <strong>+49 7153 8313-0</strong>";
+            if (q.includes('kontakt') || q.includes('telefon') || q.includes('mail') || q.includes('anfragen') || q.includes('team') || q.includes('ansprechpartner')) {
+                return "✉️ <strong>Direktkontakt:</strong><br>E-Mail: <a href='mailto:info@natursteinwerk-baeder.de' class='text-[#6085a5] underline'>info[at]natursteinwerk-baeder.de</a><br>Telefon Zentrale: <strong>+49 7153 8313-0</strong><br>David Bäder (GL): 07153 8313-19<br>Gerd Hofmann (Außendienst): 0152 05360590<br><br>Alle Kontakte auf der <a href='kontakt-anfahrt.html#team' class='text-[#6085a5] underline font-semibold'>Team-Seite</a>.";
             }
-            return "Vielen Dank für Ihre Nachricht! Dies ist eine Vorschau unseres KI-Assistenten. Bei allen Fragen stehen wir Ihnen telefonisch (+49 7153 8313-0) oder per E-Mail gerne zur Verfügung.";
+            return "Vielen Dank für Ihre Nachricht! Dies ist unser KI-Assistent. Bei allen Fragen zu Naturstein, Glasrückwänden, Keramik und Angeboten stehen wir Ihnen unter <strong>+49 7153 8313-0</strong> oder per E-Mail gerne zur Verfügung.";
         }
 
         function escapeHtml(str) {

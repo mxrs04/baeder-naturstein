@@ -66,13 +66,137 @@
         </div>
     </div>
 
-        <main class="max-w-5xl mx-auto px-4 py-16">
-            <h1 class="text-4xl text-[#6085a5] font-light mb-8">Download Preislisten 2025/26</h1>
-            <div class="p-8 bg-gray-50 border border-gray-200 rounded-lg text-gray-600">
-                <p class="text-lg mb-4">Preislisten und Produktkataloge für Gewerbekunden.</p>
-                <p class="text-sm text-gray-500 mb-6">Bitte beachten Sie: Der Download steht ausschließlich verifizierten Gewerbekunden zur Verfügung.</p>
+        <main class="max-w-5xl mx-auto px-4 py-12 sm:py-16">
+            <span class="text-[#6085a5] text-sm sm:text-base font-semibold block mb-1 tracking-wide uppercase">Produktkataloge & Tarife</span>
+            <h1 class="text-3xl sm:text-4xl text-[#6085a5] font-light mb-8">Preisliste & Übersicht 2025/2026</h1>
+
+            <!-- Neolith Bonus Banner -->
+            <div class="bg-gradient-to-r from-[#6085a5] to-[#4d6c87] text-white p-6 sm:p-8 rounded-2xl shadow-lg mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
                 <div>
-                    <a href="index.html" class="inline-block bg-[#6085a5] text-white px-6 py-2 rounded text-sm uppercase tracking-wider hover:bg-[#4d6c87] transition-colors">Zurück zur Startseite</a>
+                    <span class="bg-amber-400 text-slate-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Messe-Aktion 2026</span>
+                    <h2 class="text-2xl font-bold mb-2">Neolith EASY Bonusaktion – 500 € Gutschrift für Sie!</h2>
+                    <p class="text-sm text-white/90 leading-relaxed max-w-xl">
+                        Verkaufen Sie fünf Neolith Keramikarbeitsplatten und erhalten Sie umgehend eine Gutschrift von 500 Euro netto! 50 % Rabatt auf Aktionsdekore wie Ama Black, Calacatta Roma, Calatorao & Taj Mahal.
+                    </p>
+                </div>
+                <div class="flex-shrink-0 text-center bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20">
+                    <span class="text-3xl font-black text-amber-300 block">500 €</span>
+                    <span class="text-xs text-white/80 uppercase font-semibold">Gutschrift pro 5 Platten</span>
+                </div>
+            </div>
+
+            <!-- Download PDF Box -->
+            <div class="p-6 sm:p-8 bg-gray-50 border border-gray-200 rounded-2xl mb-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div>
+                    <h2 class="text-xl font-bold text-[#6085a5] mb-2">Offizielle Preisliste 2025/26 als PDF</h2>
+                    <p class="text-sm text-gray-600">Enthält alle technischen Daten, Tafelmaße, Aufpreise und Farbmuster für Gewerbekunden.</p>
+                </div>
+                <a href="index.html" class="inline-flex items-center gap-2 bg-[#6085a5] hover:bg-[#4d6c87] text-white px-6 py-3 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all shadow hover:shadow-md flex-shrink-0">
+                    <span>📄 Preisliste PDF anfragen</span>
+                </a>
+            </div>
+
+            <!-- Service & Administrative Rates Table -->
+            <div class="mb-16">
+                <h2 class="text-2xl text-[#6085a5] font-light mb-6">Zentrale Service- & Montagetarife</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Aufmaß & CAD -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h3 class="text-base font-bold text-[#6085a5] mb-4 pb-2 border-b border-gray-200 flex items-center justify-between">
+                            <span>Aufmaß & CAD Erstellung</span>
+                            <span class="text-xs font-normal text-gray-500">Mindestberechnung 2 m²</span>
+                        </h3>
+                        <table class="w-full text-xs sm:text-sm">
+                            <thead>
+                                <tr class="text-gray-400 text-left border-b border-gray-200"><th class="pb-2">Leistung</th><th class="pb-2">Fläche</th><th class="pb-2 text-right">Preis netto</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-gray-700">
+                                <tr><td class="py-2 font-medium">Aufmaß & CAD</td><td class="py-2">bis 3 m²</td><td class="py-2 text-right font-bold">110,00 €</td></tr>
+                                <tr><td class="py-2 font-medium">Aufmaß & CAD</td><td class="py-2">bis 5 m²</td><td class="py-2 text-right font-bold">89,00 €</td></tr>
+                                <tr><td class="py-2 font-medium">Aufmaß & CAD</td><td class="py-2">über 5 m²</td><td class="py-2 text-right font-bold">75,00 €</td></tr>
+                                <tr><td class="py-2 font-medium text-gray-500">Nur CAD</td><td class="py-2 text-gray-500">bis 3 m²</td><td class="py-2 text-right font-semibold">44,00 €</td></tr>
+                                <tr><td class="py-2 font-medium text-gray-500">Nur CAD</td><td class="py-2 text-gray-500">bis 5 m²</td><td class="py-2 text-right font-semibold">42,00 €</td></tr>
+                                <tr><td class="py-2 font-medium text-gray-500">Nur CAD</td><td class="py-2 text-gray-500">über 5 m²</td><td class="py-2 text-right font-semibold">37,50 €</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Montage -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h3 class="text-base font-bold text-[#6085a5] mb-4 pb-2 border-b border-gray-200 flex items-center justify-between">
+                            <span>Montageservice durch Bäder</span>
+                            <span class="text-xs font-normal text-gray-500">Geschultes Fachpersonal</span>
+                        </h3>
+                        <table class="w-full text-xs sm:text-sm">
+                            <thead>
+                                <tr class="text-gray-400 text-left border-b border-gray-200"><th class="pb-2">Leistung</th><th class="pb-2">Fläche</th><th class="pb-2 text-right">Preis netto</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-gray-700">
+                                <tr><td class="py-2 font-medium">Montage Arbeitsplatten</td><td class="py-2">bis 3 m²</td><td class="py-2 text-right font-bold">226,00 €</td></tr>
+                                <tr><td class="py-2 font-medium">Montage Arbeitsplatten</td><td class="py-2">bis 5 m²</td><td class="py-2 text-right font-bold">194,50 €</td></tr>
+                                <tr><td class="py-2 font-medium">Montage Arbeitsplatten</td><td class="py-2">über 5 m²</td><td class="py-2 text-right font-bold">160,00 €</td></tr>
+                                <tr><td class="py-2 font-medium">Glasrückwand Montage</td><td class="py-2">bis 3 m²</td><td class="py-2 text-right font-semibold">144,50 €</td></tr>
+                                <tr><td class="py-2 font-medium">Glasrückwand Montage</td><td class="py-2">bis 5 m²</td><td class="py-2 text-right font-semibold">127,00 €</td></tr>
+                                <tr><td class="py-2 font-medium">Glasrückwand Montage</td><td class="py-2">über 5 m²</td><td class="py-2 text-right font-semibold">119,00 €</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Delivery Costs -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h3 class="text-base font-bold text-[#6085a5] mb-4 pb-2 border-b border-gray-200">Lieferkosten pro Auftrag</h3>
+                        <ul class="divide-y divide-gray-100 text-xs sm:text-sm text-gray-700 space-y-2">
+                            <li class="pt-2 flex justify-between"><span>Regional durch Firma Bäder</span> <span class="font-bold">34,00 €</span></li>
+                            <li class="pt-2 flex justify-between"><span>Überregional durch Firma Bäder</span> <span class="font-bold">76,50 €</span></li>
+                            <li class="pt-2 flex justify-between"><span>Spedition (Auftragswert bis 250 €)</span> <span class="font-bold">102,00 €</span></li>
+                            <li class="pt-2 flex justify-between"><span>Spedition (Auftragswert 250 bis 500 €)</span> <span class="font-bold">89,00 €</span></li>
+                            <li class="pt-2 flex justify-between"><span>Spedition (Auftragswert über 500 €)</span> <span class="font-bold">76,50 €</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Electrical & Plumbing Installation -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h3 class="text-base font-bold text-[#6085a5] mb-4 pb-2 border-b border-gray-200">Strom- & Wasserinstallationen</h3>
+                        <ul class="divide-y divide-gray-100 text-xs sm:text-sm text-gray-700 space-y-2">
+                            <li class="pt-2 flex justify-between"><span>Deinstallation / Installation je Steckdose</span> <span class="font-bold">20,50 €</span></li>
+                            <li class="pt-2 flex justify-between"><span>Installation Kochfeld Standard</span> <span class="font-bold">89,00 €</span></li>
+                            <li class="pt-2 flex justify-between"><span>Installation Kochfeld mehrteilig</span> <span class="font-bold">129,50 €</span></li>
+                            <li class="pt-2 flex justify-between"><span>Spüle Wasseranschluss</span> <span class="font-bold">147,00 €</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Material Categories Summary -->
+            <div>
+                <h2 class="text-2xl text-[#6085a5] font-light mb-6">Materialkategorien & Richtpreise</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Natursteine -->
+                    <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-xs">
+                        <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Kategorie 1</span>
+                        <h3 class="text-lg font-bold text-[#6085a5] mt-1 mb-2">Natursteinwerk</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">Über 80 verschiedene Granite, Hartgesteine & Kalksteine am Lager in 20 & 30 mm Stärke.</p>
+                        <p class="text-sm font-bold text-gray-800">Richtpreis: <span class="text-[#6085a5]">ab 247,00 €/m²</span></p>
+                        <p class="text-[11px] text-gray-500 mt-1">z.B. Rosa Beta 247 €, Bianco Sardo 252 €, Angola Schwarz 393 €</p>
+                    </div>
+
+                    <!-- Vetroplan Glas -->
+                    <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-xs">
+                        <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Kategorie 2</span>
+                        <h3 class="text-lg font-bold text-[#6085a5] mt-1 mb-2">Vetroplan Glas</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">ESG-Sicherheitsglas, Satinato, Diamantglas (kratzfest), Digitalprints & Leuchtfelder.</p>
+                        <p class="text-sm font-bold text-gray-800">Richtpreis: <span class="text-[#6085a5]">ab 251,00 €/m²</span></p>
+                        <p class="text-[11px] text-gray-500 mt-1">Life-Line 251 €, Basic-Line 281 €, Steel Art 348 €, Digitalprint 367 €</p>
+                    </div>
+
+                    <!-- Dekton / Neolith / Laminam -->
+                    <div class="p-6 bg-white border border-gray-200 rounded-2xl shadow-xs">
+                        <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Kategorie 3</span>
+                        <h3 class="text-lg font-bold text-[#6085a5] mt-1 mb-2">Keramik & High-Tech</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">Neolith, Dekton, SapienStone & Laminam. Extrem hitzebeständig und kratzfest.</p>
+                        <p class="text-sm font-bold text-gray-800">Richtpreis: <span class="text-[#6085a5]">ab 322,00 €/m²</span></p>
+                        <p class="text-[11px] text-gray-500 mt-1">Laminam ab 322 €, Dekton ab 517 € (gesenkt!), Neolith EASY ab 748 €</p>
+                    </div>
                 </div>
             </div>
         </main>
@@ -208,19 +332,19 @@
 
         function getDummyBotResponse(query) {
             const q = query.toLowerCase();
-            if (q.includes('öffnungszeit') || q.includes('zeit') || q.includes('standort') || q.includes('wo') || q.includes('anfahrt')) {
-                return "📍 <strong>Standort & Öffnungszeiten:</strong><br>In den Weiden 24, 73776 Altbach.<br>Mo–Fr: 08:00 – 17:00 Uhr.<br>Tel: +49 7153 8313-0";
+            if (q.includes('öffnungszeit') || q.includes('zeit') || q.includes('standort') || q.includes('wo') || q.includes('anfahrt') || q.includes('geöffnet') || q.includes('wann')) {
+                return "📍 <strong>Standort & Geschäftszeiten:</strong><br>Eberhard Bäder Natursteine und Glas GmbH & Co. KG<br>In den Weiden 24, 73776 Altbach<br><br>🕒 <strong>Öffnungszeiten:</strong><br>• Mo – Mi: 08:00 – 12:20 & 13:00 – 17:00 Uhr<br>• <strong>Donnerstag:</strong> 08:00 – 12:20 & 13:00 – 18:00 Uhr<br>• Fr: 08:00 – 12:20 & 13:00 – 17:00 Uhr<br><br>📞 Tel: +49 7153 8313-0";
             }
-            if (q.includes('material') || q.includes('naturstein') || q.includes('dekton') || q.includes('neolith') || q.includes('laminam') || q.includes('glas')) {
-                return "🪨 Wir führen hochwertigen Naturstein, Vetroplan Glasrückfronten, Dekton, Neolith Keramik & Laminam. Nutzen Sie unser Hauptmenü für Detailinfos!";
+            if (q.includes('preis') || q.includes('kosten') || q.includes('angebot') || q.includes('tarif') || q.includes('aufmaß') || q.includes('montage') || q.includes('lieferung') || q.includes('rabatt') || q.includes('aktion')) {
+                return "📄 <strong>Auszug aus der Preisliste 2025/26:</strong><br>• <strong>Aufmaß & CAD:</strong> 110 € (bis 3m²), 89 € (bis 5m²), 75 € (>5m²)<br>• <strong>Montage:</strong> 226 € (bis 3m²), 194,50 € (bis 5m²), 160 € (>5m²)<br>• <strong>Lieferung:</strong> Regional 34 €, Überregional 76,50 €<br>• <strong>Natursteine:</strong> ab 247 €/m² (z.B. Rosa Beta)<br>• <strong>Vetroplan Glas:</strong> ab 251 €/m²<br>• <strong>Dekton Keramik:</strong> ab 517 €/m² (Aktionspreise!)<br>• <strong>Neolith EASY Aktion:</strong> 500 € Gutschrift bei 5 Platten!<br><br>Details auf der <a href='download-preislisten.html' class='text-[#6085a5] underline font-semibold'>Download-Seite</a>.";
             }
-            if (q.includes('preis') || q.includes('kosten') || q.includes('angebot')) {
-                return "📄 Unsere Preislisten für 2025/26 stehen auf unserer <a href='download-preislisten.html' class='text-[#6085a5] underline font-semibold'>Download-Seite</a> bereit!";
+            if (q.includes('material') || q.includes('naturstein') || q.includes('dekton') || q.includes('neolith') || q.includes('laminam') || q.includes('glas') || q.includes('granit')) {
+                return "🪨 Wir führen über 80 Natursteine (Granit, Marmor), Vetroplan Glasrückwände & Arbeitsplatten, Dekton, Neolith Keramik, SapienStone & Laminam. Schauen Sie in unser Hauptmenü für Detailkataloge!";
             }
-            if (q.includes('kontakt') || q.includes('telefon') || q.includes('mail') || q.includes('anfragen')) {
-                return "✉️ E-Mail: <a href='mailto:info@natursteinwerk-baeder.de' class='text-[#6085a5] underline'>info@natursteinwerk-baeder.de</a><br>Telefon: <strong>+49 7153 8313-0</strong>";
+            if (q.includes('kontakt') || q.includes('telefon') || q.includes('mail') || q.includes('anfragen') || q.includes('team') || q.includes('ansprechpartner')) {
+                return "✉️ <strong>Direktkontakt:</strong><br>E-Mail: <a href='mailto:info@natursteinwerk-baeder.de' class='text-[#6085a5] underline'>info[at]natursteinwerk-baeder.de</a><br>Telefon Zentrale: <strong>+49 7153 8313-0</strong><br>David Bäder (GL): 07153 8313-19<br>Gerd Hofmann (Außendienst): 0152 05360590<br><br>Alle Kontakte auf der <a href='kontakt-anfahrt.html#team' class='text-[#6085a5] underline font-semibold'>Team-Seite</a>.";
             }
-            return "Vielen Dank für Ihre Nachricht! Dies ist eine Vorschau unseres KI-Assistenten. Bei allen Fragen stehen wir Ihnen telefonisch (+49 7153 8313-0) oder per E-Mail gerne zur Verfügung.";
+            return "Vielen Dank für Ihre Nachricht! Dies ist unser KI-Assistent. Bei allen Fragen zu Naturstein, Glasrückwänden, Keramik und Angeboten stehen wir Ihnen unter <strong>+49 7153 8313-0</strong> oder per E-Mail gerne zur Verfügung.";
         }
 
         function escapeHtml(str) {

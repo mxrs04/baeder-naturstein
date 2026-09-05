@@ -66,30 +66,204 @@
         </div>
     </div>
 
-        <main class="max-w-5xl mx-auto px-4 py-16">
-            <h1 class="text-4xl text-[#6085a5] font-light mb-8">Kontakt & Anfahrt</h1>
-            <div class="p-8 bg-gray-50 border border-gray-200 rounded-lg text-gray-600 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h2 class="text-xl font-semibold text-[#6085a5] mb-4">Eberhard Bäder Natursteine und Glas GmbH & Co. KG</h2>
-                    <p class="text-sm leading-relaxed mb-4">
-                        In den Weiden 24<br>
-                        73776 Altbach<br>
-                        Deutschland
-                    </p>
-                    <p class="text-sm leading-relaxed">
-                        <strong>Telefon:</strong> +49 7153 8313-0<br>
-                        <strong>Fax:</strong> +49 7153 8313-20<br>
-                        <strong>E-Mail:</strong> <a href="mailto:info@natursteinwerk-baeder.de" class="text-[#6085a5] hover:underline">info@natursteinwerk-baeder.de</a>
-                    </p>
+        <main class="max-w-5xl mx-auto px-4 py-12 sm:py-16">
+            <span class="text-[#6085a5] text-sm sm:text-base font-semibold block mb-1 tracking-wide uppercase">Ihr Kontakt zu uns</span>
+            <h1 class="text-3xl sm:text-4xl text-[#6085a5] font-light mb-8">Kontakt & Anfahrt</h1>
+            
+            <!-- Contact & Hours Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Address & Hours -->
+                <div class="p-6 sm:p-8 bg-gray-50 border border-gray-200 rounded-2xl shadow-xs flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-[#6085a5] mb-4">Eberhard Bäder Natursteine und Glas GmbH & Co. KG</h2>
+                        <p class="text-sm text-gray-700 leading-relaxed mb-6">
+                            In den Weiden 24<br>
+                            73776 Altbach<br>
+                            Deutschland
+                        </p>
+                        
+                        <div class="space-y-2 text-sm text-gray-700 border-t border-gray-200 pt-4 mb-6">
+                            <p><strong>Telefon:</strong> <a href="tel:+49715383130" class="text-[#6085a5] hover:underline">+49 7153 8313-0</a></p>
+                            <p><strong>Telefax:</strong> +49 7153 8313-20</p>
+                            <p><strong>E-Mail:</strong> <a href="mailto:info@natursteinwerk-baeder.de" class="text-[#6085a5] hover:underline">info[at]natursteinwerk-baeder.de</a></p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-gray-200/80 shadow-2xs">
+                        <h3 class="font-bold text-sm text-[#6085a5] mb-2 flex items-center gap-1.5">
+                            <span>🕒</span> Geschäftszeiten
+                        </h3>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li class="flex justify-between"><span class="font-medium">Montag – Mittwoch:</span> <span>08:00 – 12:20 & 13:00 – 17:00 Uhr</span></li>
+                            <li class="flex justify-between text-[#6085a5] font-semibold"><span class="font-medium">Donnerstag:</span> <span>08:00 – 12:20 & 13:00 – 18:00 Uhr</span></li>
+                            <li class="flex justify-between"><span class="font-medium">Freitag:</span> <span>08:00 – 12:20 & 13:00 – 17:00 Uhr</span></li>
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="text-xl font-semibold text-[#6085a5] mb-4">Anfahrt & Ausstellungsraum</h2>
-                    <p class="text-sm leading-relaxed mb-6">
-                        Besuchen Sie unseren Ausstellungsraum in Altbach bei Esslingen. Bitte vereinbaren Sie vorab einen Beratungstermin.
-                    </p>
-                    <a href="index.html" class="inline-block bg-[#6085a5] text-white px-6 py-2 rounded text-sm uppercase tracking-wider hover:bg-[#4d6c87] transition-colors">Zurück zur Startseite</a>
+
+                <!-- Team Info & Appointment Callout -->
+                <div class="p-6 sm:p-8 bg-sky-50/50 border border-[#6085a5]/20 rounded-2xl shadow-xs flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-[#6085a5]/10 flex items-center justify-center text-[#6085a5] font-bold text-xl mb-4">
+                            👥
+                        </div>
+                        <h2 class="text-xl font-bold text-[#6085a5] mb-3">Persönliche Ansprechpartner</h2>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                            Alle Ansprechpartner mit Telefonnummer und E-Mail-Adresse finden Sie auf unserer Team-Seite.
+                        </p>
+                    </div>
+
+                    <div>
+                        <a href="#team" class="inline-flex items-center gap-2 bg-[#6085a5] text-white px-6 py-3 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider hover:bg-[#4d6c87] shadow hover:shadow-md transition-all">
+                            <span>Zur Team-Seite</span>
+                            <span>↓</span>
+                        </a>
+                    </div>
                 </div>
             </div>
+
+            <!-- Satellite Aerial Map with Overlay Anfahrt Button -->
+            <div class="mb-16">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl text-[#6085a5] font-light">Verortung & Anfahrt</h2>
+                    <span class="text-xs text-gray-500">Standort: In den Weiden 24, Altbach</span>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden shadow-xl border border-gray-200 group">
+                    <img src="assets/anfahrt-map.jpg" alt="Satellitenaufnahme Standort Bäder Eberhard Natursteinwerk" class="w-full h-[350px] sm:h-[450px] object-cover transition-transform duration-500 group-hover:scale-102">
+                    
+                    <!-- Overlaid Anfahrt Button linked to Google Maps coordinates -->
+                    <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6">
+                        <a href="https://www.google.com/maps/search/?api=1&query=48%C2%B043%2720.5%22N+9%C2%B022%2730.8%22E" target="_blank" rel="noopener noreferrer" class="bg-[#6085a5] hover:bg-[#4d6c87] text-white font-semibold text-xs sm:text-sm px-6 py-3 rounded-full shadow-2xl flex items-center gap-2.5 transition-all transform hover:scale-105 active:scale-95 border border-white/30 backdrop-blur-md">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>Anfahrt via Google Maps</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team & Direct Contact Directory -->
+            <section id="team" class="pt-8 border-t border-gray-200">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-[#6085a5] text-xs font-bold uppercase tracking-widest block mb-1">Unser Team</span>
+                    <h2 class="text-3xl text-[#6085a5] font-light mb-3">Ansprechpartner & Durchwahlen</h2>
+                    <p class="text-sm text-gray-500">Erreichen Sie unsere Fachberater, Disposition und Geschäftsleitung direkt per Telefon oder E-Mail.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Geschäftsleitung -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h3 class="text-sm font-bold text-[#6085a5] uppercase tracking-wider mb-4 pb-2 border-b border-gray-200">Geschäftsleitung</h3>
+                        <div class="space-y-4 text-xs sm:text-sm">
+                            <div>
+                                <p class="font-bold text-gray-800">Herr David Bäder</p>
+                                <p class="text-gray-600">Tel: <a href="tel:+497153831319" class="text-[#6085a5] hover:underline">07153 8313-19</a></p>
+                                <p class="text-gray-600"><a href="mailto:david-baeder@natursteinwerk-baeder.de" class="text-[#6085a5] hover:underline">david-baeder@natursteinwerk-baeder.de</a></p>
+                            </div>
+                            <div class="pt-2 border-t border-gray-100">
+                                <p class="font-bold text-gray-800">Herr Eberhard Bäder</p>
+                                <p class="text-gray-600">Tel: <a href="tel:+497153831328" class="text-[#6085a5] hover:underline">07153 8313-28</a></p>
+                                <p class="text-gray-600"><a href="mailto:eberhard-baeder@natursteinwerk-baeder.de" class="text-[#6085a5] hover:underline">eberhard-baeder@natursteinwerk-baeder.de</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Buchhaltung -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h3 class="text-sm font-bold text-[#6085a5] uppercase tracking-wider mb-4 pb-2 border-b border-gray-200">Buchhaltung</h3>
+                        <div class="space-y-4 text-xs sm:text-sm">
+                            <div>
+                                <p class="font-bold text-gray-800">Frau Ester Held</p>
+                                <p class="text-gray-600">Tel: <a href="tel:+497153831311" class="text-[#6085a5] hover:underline">07153 8313-11</a></p>
+                                <p class="text-gray-600"><a href="mailto:ester-held@natursteinwerk-baeder.de" class="text-[#6085a5] hover:underline">ester-held@natursteinwerk-baeder.de</a></p>
+                            </div>
+                            <div class="pt-2 border-t border-gray-100">
+                                <p class="font-bold text-gray-800">Frau Karin Strobel</p>
+                                <p class="text-gray-600">Tel: <a href="tel:+497153831312" class="text-[#6085a5] hover:underline">07153 8313-12</a></p>
+                                <p class="text-gray-600"><a href="mailto:karin-strobel@natursteinwerk-baeder.de" class="text-[#6085a5] hover:underline">karin-strobel@natursteinwerk-baeder.de</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Außendienst -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h3 class="text-sm font-bold text-[#6085a5] uppercase tracking-wider mb-4 pb-2 border-b border-gray-200">Außendienst</h3>
+                        <div class="space-y-3 text-xs sm:text-sm">
+                            <div>
+                                <p class="font-bold text-gray-800">Herr Gerd Hofmann</p>
+                                <p class="text-gray-600">Tel: 07153 8313-27 | Mobil: 0152 05360590</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Herr Willi Günthner</p>
+                                <p class="text-gray-600">Mobil: 0179 2430977</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Frau Severine Castaldi</p>
+                                <p class="text-gray-600">Tel: 07153 8313-28 | Mobil: 0155 63411743</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sachbearbeitung Stein / Keramik -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h3 class="text-sm font-bold text-[#6085a5] uppercase tracking-wider mb-4 pb-2 border-b border-gray-200">Sachbearbeitung Stein & Keramik</h3>
+                        <div class="space-y-3 text-xs sm:text-sm">
+                            <div>
+                                <p class="font-bold text-gray-800">Frau Silvija Ostric</p>
+                                <p class="text-gray-600">Tel: 07153 8313-15</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Herr Adam Swais</p>
+                                <p class="text-gray-600">Tel: 07153 8313-17</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Frau Gislinde Sobeck</p>
+                                <p class="text-gray-600">Tel: 07153 8313-37</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sachbearbeitung Glasrückwände -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h3 class="text-sm font-bold text-[#6085a5] uppercase tracking-wider mb-4 pb-2 border-b border-gray-200">Sachbearbeitung Glasrückwände</h3>
+                        <div class="space-y-3 text-xs sm:text-sm">
+                            <div>
+                                <p class="font-bold text-gray-800">Frau Susanna Miloradovic</p>
+                                <p class="text-gray-600">Tel: 07153 8313-32</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Frau Sabine Walsh</p>
+                                <p class="text-gray-600">Tel: 07153 8313-31</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Frau Ute Geretshauser</p>
+                                <p class="text-gray-600">Tel: 07153 8313-35</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Disposition & Produktion -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                        <h3 class="text-sm font-bold text-[#6085a5] uppercase tracking-wider mb-4 pb-2 border-b border-gray-200">Disposition & Produktion</h3>
+                        <div class="space-y-3 text-xs sm:text-sm">
+                            <div>
+                                <p class="font-bold text-gray-800">Herr Tim Semler (Disposition)</p>
+                                <p class="text-gray-600">Tel: 07153 8313-30</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Herr Emmanouil Taosanis (Produktion)</p>
+                                <p class="text-gray-600">Tel: 07153 8313-26</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">Herr Frank Diez (Aufmaß)</p>
+                                <p class="text-gray-600">Tel: 07153 8313-34 | Mobil: 0157 53604261</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -223,19 +397,19 @@
 
         function getDummyBotResponse(query) {
             const q = query.toLowerCase();
-            if (q.includes('öffnungszeit') || q.includes('zeit') || q.includes('standort') || q.includes('wo') || q.includes('anfahrt')) {
-                return "📍 <strong>Standort & Öffnungszeiten:</strong><br>In den Weiden 24, 73776 Altbach.<br>Mo–Fr: 08:00 – 17:00 Uhr.<br>Tel: +49 7153 8313-0";
+            if (q.includes('öffnungszeit') || q.includes('zeit') || q.includes('standort') || q.includes('wo') || q.includes('anfahrt') || q.includes('geöffnet') || q.includes('wann')) {
+                return "📍 <strong>Standort & Geschäftszeiten:</strong><br>Eberhard Bäder Natursteine und Glas GmbH & Co. KG<br>In den Weiden 24, 73776 Altbach<br><br>🕒 <strong>Öffnungszeiten:</strong><br>• Mo – Mi: 08:00 – 12:20 & 13:00 – 17:00 Uhr<br>• <strong>Donnerstag:</strong> 08:00 – 12:20 & 13:00 – 18:00 Uhr<br>• Fr: 08:00 – 12:20 & 13:00 – 17:00 Uhr<br><br>📞 Tel: +49 7153 8313-0";
             }
-            if (q.includes('material') || q.includes('naturstein') || q.includes('dekton') || q.includes('neolith') || q.includes('laminam') || q.includes('glas')) {
-                return "🪨 Wir führen hochwertigen Naturstein, Vetroplan Glasrückfronten, Dekton, Neolith Keramik & Laminam. Nutzen Sie unser Hauptmenü für Detailinfos!";
+            if (q.includes('preis') || q.includes('kosten') || q.includes('angebot') || q.includes('tarif') || q.includes('aufmaß') || q.includes('montage') || q.includes('lieferung') || q.includes('rabatt') || q.includes('aktion')) {
+                return "📄 <strong>Auszug aus der Preisliste 2025/26:</strong><br>• <strong>Aufmaß & CAD:</strong> 110 € (bis 3m²), 89 € (bis 5m²), 75 € (>5m²)<br>• <strong>Montage:</strong> 226 € (bis 3m²), 194,50 € (bis 5m²), 160 € (>5m²)<br>• <strong>Lieferung:</strong> Regional 34 €, Überregional 76,50 €<br>• <strong>Natursteine:</strong> ab 247 €/m² (z.B. Rosa Beta)<br>• <strong>Vetroplan Glas:</strong> ab 251 €/m²<br>• <strong>Dekton Keramik:</strong> ab 517 €/m² (Aktionspreise!)<br>• <strong>Neolith EASY Aktion:</strong> 500 € Gutschrift bei 5 Platten!<br><br>Details auf der <a href='download-preislisten.html' class='text-[#6085a5] underline font-semibold'>Download-Seite</a>.";
             }
-            if (q.includes('preis') || q.includes('kosten') || q.includes('angebot')) {
-                return "📄 Unsere Preislisten für 2025/26 stehen auf unserer <a href='download-preislisten.html' class='text-[#6085a5] underline font-semibold'>Download-Seite</a> bereit!";
+            if (q.includes('material') || q.includes('naturstein') || q.includes('dekton') || q.includes('neolith') || q.includes('laminam') || q.includes('glas') || q.includes('granit')) {
+                return "🪨 Wir führen über 80 Natursteine (Granit, Marmor), Vetroplan Glasrückwände & Arbeitsplatten, Dekton, Neolith Keramik, SapienStone & Laminam. Schauen Sie in unser Hauptmenü für Detailkataloge!";
             }
-            if (q.includes('kontakt') || q.includes('telefon') || q.includes('mail') || q.includes('anfragen')) {
-                return "✉️ E-Mail: <a href='mailto:info@natursteinwerk-baeder.de' class='text-[#6085a5] underline'>info@natursteinwerk-baeder.de</a><br>Telefon: <strong>+49 7153 8313-0</strong>";
+            if (q.includes('kontakt') || q.includes('telefon') || q.includes('mail') || q.includes('anfragen') || q.includes('team') || q.includes('ansprechpartner')) {
+                return "✉️ <strong>Direktkontakt:</strong><br>E-Mail: <a href='mailto:info@natursteinwerk-baeder.de' class='text-[#6085a5] underline'>info[at]natursteinwerk-baeder.de</a><br>Telefon Zentrale: <strong>+49 7153 8313-0</strong><br>David Bäder (GL): 07153 8313-19<br>Gerd Hofmann (Außendienst): 0152 05360590<br><br>Alle Kontakte auf der <a href='kontakt-anfahrt.html#team' class='text-[#6085a5] underline font-semibold'>Team-Seite</a>.";
             }
-            return "Vielen Dank für Ihre Nachricht! Dies ist eine Vorschau unseres KI-Assistenten. Bei allen Fragen stehen wir Ihnen telefonisch (+49 7153 8313-0) oder per E-Mail gerne zur Verfügung.";
+            return "Vielen Dank für Ihre Nachricht! Dies ist unser KI-Assistent. Bei allen Fragen zu Naturstein, Glasrückwänden, Keramik und Angeboten stehen wir Ihnen unter <strong>+49 7153 8313-0</strong> oder per E-Mail gerne zur Verfügung.";
         }
 
         function escapeHtml(str) {
