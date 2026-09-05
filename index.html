@@ -14,11 +14,11 @@
     <style>
         body { font-family: 'Open Sans', sans-serif; }
         @media (min-width: 768px) { body { cursor: none; } }
-        .cursor-hover { transform: translate(-50%, -50%) scale(1.8) !important; background-color: rgba(255,255,255,0.2); }
+        .cursor-hover { transform: translate(-50%, -50%) scale(2.2) !important; background-color: rgba(255,255,255,0.25); }
     </style>
 </head>
 <body class="bg-white text-slate-800 antialiased">
-    <div id="customCursor" class="hidden md:block pointer-events-none fixed top-0 left-0 w-6 h-6 rounded-full border border-white z-[9999] transition-transform duration-200" style="mix-blend-mode: difference; transform: translate(-50%, -50%);"></div>
+    <div id="customCursor" class="hidden md:block pointer-events-none fixed top-0 left-0 w-4 h-4 rounded-full border border-white z-[9999] transition-transform duration-150" style="mix-blend-mode: difference; transform: translate(-50%, -50%);"></div>
     
     <nav class="fixed w-full top-0 z-50 bg-white/30 backdrop-blur-md border-b border-white/20 transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -71,50 +71,65 @@
     </div>
 
     <main class="max-w-7xl mx-auto px-4 pt-28 pb-12">
-        <div class="relative w-full overflow-hidden min-h-[60vh] flex items-end mb-16 rounded-3xl shadow-2xl">
-            <img src="assets/01.jpg" alt="Küchenarbeitsplatte 1" class="absolute inset-0 w-full h-full object-cover z-0">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"></div>
-            <div class="relative z-20 p-8 md:p-16 text-white w-full md:w-2/3">
-                <span class="text-[#6085a5] text-lg block mb-2 font-semibold tracking-wide uppercase">Erleben Sie die Faszination Naturstein!</span>
-                <h1 class="text-3xl md:text-5xl font-light mb-6 text-white leading-tight">Hochwertige Natursteinarbeiten aus Altbach</h1>
-                <p class="text-white/90 text-sm md:text-base leading-relaxed">
-                    Die Eberhard Bäder Natursteine und Glas GmbH ist Ihr Partner für Natursteinarbeiten in Altbach, Esslingen, Stuttgart und dem Baden-Württembergischen Raum.<br>
-                    Überzeugen Sie sich und Ihre Familie von den faszinierenden Elementen Stein, Keramik und Glas – Sie werden sehen, dass Sie deren Schönheit und Komfort garantiert nicht mehr missen möchten!
+        <div class="relative w-full overflow-hidden min-h-[50vh] flex items-end mb-12 rounded-3xl shadow-2xl group border border-slate-800/20">
+            <img src="assets/01.jpg" alt="Küchenarbeitsplatte 1" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent z-10"></div>
+            <div class="relative z-20 p-6 md:p-12 text-white w-full md:w-3/4">
+                <span class="text-[#89b4d8] text-xs md:text-sm font-bold tracking-widest uppercase block mb-2">Erleben Sie die Faszination Naturstein!</span>
+                <h1 class="text-2xl md:text-4xl font-semibold mb-3 text-white leading-tight">Hochwertige Natursteinarbeiten aus Altbach</h1>
+                <p class="text-slate-200 text-sm md:text-base leading-relaxed mb-4 max-w-2xl">
+                    Die Eberhard Bäder Natursteine und Glas GmbH ist Ihr Partner für Natursteinarbeiten in Altbach, Esslingen, Stuttgart und dem Baden-Württembergischen Raum.
                 </p>
+                <button onclick="toggleDetails('details-1', this)" class="inline-flex items-center gap-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 text-white px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all focus:outline-none shadow-md">
+                    <span class="btn-text">Mehr erfahren</span>
+                    <span class="w-5 h-5 rounded-full bg-white text-slate-900 flex items-center justify-center font-bold text-xs icon-plus">+</span>
+                </button>
+                <div id="details-1" class="hidden mt-4 pt-4 border-t border-white/20 text-slate-200 text-sm leading-relaxed transition-all">
+                    <p>Überzeugen Sie sich und Ihre Familie von den faszinierenden Elementen Stein, Keramik und Glas – Sie werden sehen, dass Sie deren Schönheit und Komfort garantiert nicht mehr missen möchten!</p>
+                </div>
             </div>
         </div>
 
-        <div class="relative w-full overflow-hidden min-h-[60vh] flex items-end mb-16 rounded-3xl shadow-2xl">
-            <img src="assets/02.jpg" alt="Küchenarbeitsplatte 2" class="absolute inset-0 w-full h-full object-cover z-0">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent z-10"></div>
-            <div class="relative z-20 p-8 md:p-16 text-white w-full md:w-2/3">
-                <h2 class="text-2xl md:text-4xl text-white mb-6 font-light leading-snug">Natursteinarbeiten und Glasprodukte aus Altbach bei Esslingen</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-white/90 text-sm leading-relaxed">
-                    <div>
-                        <p class="mb-4">An unserem Standort in Altbach, ganz in der Nähe von Esslingen, verarbeiten wir sowohl Natursteine wie Granit, Quarzkomposit (Silestone), Keramik, Marmor als auch Glas. Unsere Glas- und Natursteinarbeiten finden Anwendung in den unterschiedlichsten Innen- und Außenbereichen, zum Beispiel als:</p>
-                        <ul class="list-disc pl-5 space-y-1 text-[#6085a5]">
-                            <li><span class="text-white">Küchenarbeitsplatte oder Tischplatte</span></li>
-                            <li><span class="text-white">Waschtischplatte oder Duschtrennwand im Bad</span></li>
-                            <li><span class="text-white">Wandverkleidung</span></li>
-                            <li><span class="text-white">Terrassenplatte</span></li>
-                            <li><span class="text-white">Treppe und Bodenplatte</span></li>
-                            <li><span class="text-white">Fenstersims</span></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="mb-4">Egal, ob es um die Erneuerung Ihrer Küche durch eine Naturstein- oder Glasarbeitsplatte geht, um die Modernisierung Ihres Bades oder um eine Neugestaltung Ihrer Wohnräume – über die vielfältigen Einsatzmöglichkeiten von Naturstein und Glas beraten wir Sie gerne individuell in unserem Hause in Altbach bei Esslingen.</p>
-                        <p class="mb-4">In unserem Ausstellungsraum erhalten Sie einen ersten Eindruck von unseren Natursteinarbeiten. Gerne können Sie sich von allen vorrätigen Materialien aus Stein, Glas, Silestone und Keramik ein passendes Muster für zu Hause mitnehmen und so vor Ort ausprobieren, ob das ausgewählte Material beispielsweise mit Ihrem Fußboden, Ihren Möbeln oder Wohn-Accessoires harmoniert.</p>
-                        <p>Schauen Sie gerne bei uns vorbei oder kontaktieren Sie uns für weitere Informationen!</p>
+        <div class="relative w-full overflow-hidden min-h-[50vh] flex items-end mb-12 rounded-3xl shadow-2xl group border border-slate-800/20">
+            <img src="assets/02.jpg" alt="Küchenarbeitsplatte 2" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent z-10"></div>
+            <div class="relative z-20 p-6 md:p-12 text-white w-full md:w-5/6">
+                <h2 class="text-2xl md:text-3xl text-white mb-3 font-semibold leading-snug">Natursteinarbeiten und Glasprodukte aus Altbach bei Esslingen</h2>
+                <p class="text-slate-200 text-sm md:text-base leading-relaxed mb-4 max-w-3xl">
+                    An unserem Standort in Altbach verarbeiten wir Natursteine wie Granit, Quarzkomposit (Silestone), Keramik, Marmor sowie Glas für unterschiedlichste Innen- und Außenbereiche.
+                </p>
+                <button onclick="toggleDetails('details-2', this)" class="inline-flex items-center gap-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 text-white px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all focus:outline-none shadow-md">
+                    <span class="btn-text">Mehr Details</span>
+                    <span class="w-5 h-5 rounded-full bg-white text-slate-900 flex items-center justify-center font-bold text-xs icon-plus">+</span>
+                </button>
+                <div id="details-2" class="hidden mt-6 pt-6 border-t border-white/20 text-slate-200 text-sm leading-relaxed transition-all">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="mb-3">Unsere Glas- und Natursteinarbeiten finden Anwendung zum Beispiel als:</p>
+                            <ul class="list-disc pl-5 space-y-1 text-[#89b4d8]">
+                                <li><span class="text-white">Küchenarbeitsplatte oder Tischplatte</span></li>
+                                <li><span class="text-white">Waschtischplatte oder Duschtrennwand im Bad</span></li>
+                                <li><span class="text-white">Wandverkleidung</span></li>
+                                <li><span class="text-white">Terrassenplatte</span></li>
+                                <li><span class="text-white">Treppe und Bodenplatte</span></li>
+                                <li><span class="text-white">Fenstersims</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="mb-3">Egal, ob Küchenerneuerung, Badmodernisierung oder Neugestaltung Ihrer Wohnräume – wir beraten Sie gerne individuell in unserem Hause in Altbach bei Esslingen.</p>
+                            <p class="mb-3">In unserem Ausstellungsraum erhalten Sie einen ersten Eindruck von unseren Natursteinarbeiten. Gerne können Sie sich von allen vorrätigen Materialien aus Stein, Glas, Silestone und Keramik ein passendes Muster für zu Hause mitnehmen.</p>
+                            <p>Schauen Sie gerne bei uns vorbei oder kontaktieren Sie uns für weitere Informationen!</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="relative w-full overflow-hidden min-h-[50vh] flex items-end mb-16 rounded-3xl shadow-2xl">
-            <img src="assets/03.jpg" alt="Kücheninsel" class="absolute inset-0 w-full h-full object-cover z-0">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>
-            <div class="relative z-20 p-8 md:p-12 text-white w-full md:w-2/3">
-                <h2 class="text-2xl md:text-4xl text-white mb-2 font-light">Natur- oder Steinplatten direkt vom Hersteller!</h2>
+        <div class="relative w-full overflow-hidden min-h-[40vh] flex items-end mb-16 rounded-3xl shadow-2xl group border border-slate-800/20">
+            <img src="assets/03.jpg" alt="Kücheninsel" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent z-10"></div>
+            <div class="relative z-20 p-6 md:p-10 text-white w-full md:w-2/3">
+                <h2 class="text-2xl md:text-3xl text-white mb-2 font-semibold">Natur- oder Steinplatten direkt vom Hersteller!</h2>
             </div>
         </div>
 
@@ -435,6 +450,29 @@
             return str.replace(/[&<>"']/g, function(m) {
                 return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
             });
+        }
+
+        function toggleDetails(id, btn) {
+            const details = document.getElementById(id);
+            if (!details) return;
+            const isHidden = details.classList.contains('hidden');
+            if (isHidden) {
+                details.classList.remove('hidden');
+                if (btn) {
+                    const txt = btn.querySelector('.btn-text');
+                    const icon = btn.querySelector('.icon-plus');
+                    if (txt) txt.textContent = 'Weniger anzeigen';
+                    if (icon) icon.textContent = '−';
+                }
+            } else {
+                details.classList.add('hidden');
+                if (btn) {
+                    const txt = btn.querySelector('.btn-text');
+                    const icon = btn.querySelector('.icon-plus');
+                    if (txt) txt.textContent = 'Mehr erfahren';
+                    if (icon) icon.textContent = '+';
+                }
+            }
         }
 
         const cursor = document.getElementById('customCursor');
