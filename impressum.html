@@ -13,62 +13,59 @@
 </head>
 <body class="bg-white text-slate-800 antialiased min-h-screen flex flex-col justify-between">
     <div>
-        <!-- Top Header -->
-        <nav class="bg-white sticky top-0 z-40 border-b border-gray-100 shadow-sm">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-                <button onclick="openMenu()" class="flex items-center gap-3 text-black hover:text-[#6085a5] focus:outline-none group py-1 px-2 transition-colors">
-                    <svg class="w-8 h-8 text-black group-hover:text-[#6085a5] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                    <span class="font-bold text-base uppercase tracking-widest text-black group-hover:text-[#6085a5] transition-colors">MENÜ</span>
-                </button>
+    <!-- Top Header -->
+    <nav class="bg-white sticky top-0 z-40 border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <button onclick="openMenu()" class="flex items-center gap-3 text-[#6085a5] hover:opacity-80 focus:outline-none group py-1 px-2 transition-colors">
+                <svg class="w-8 h-8 text-[#6085a5] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+                <span class="font-bold text-base uppercase tracking-widest text-[#6085a5] transition-colors">MENÜ</span>
+            </button>
 
-                <a href="index.html">
-                    <img class="h-14 w-auto" src="assets/logo.png" alt="Bäder Natursteine und Glas Logo">
-                </a>
-            </div>
-        </nav>
+            <a href="index.html" class="flex items-center justify-end">
+                <img class="h-12 sm:h-14 w-auto object-contain" src="assets/logo.png" alt="Bäder Natursteine und Glas Logo">
+            </a>
+        </div>
+    </nav>
 
-        <!-- Fullscreen Menu Drawer (Schwarz auf Weiss) -->
-        <div id="full-menu" class="fixed inset-0 z-50 bg-white text-black hidden flex flex-col justify-between p-6 sm:p-12 overflow-y-auto">
-            <div class="max-w-4xl mx-auto w-full flex items-center justify-between">
-                <button onclick="closeMenu()" class="w-12 h-12 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-black transition-colors focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-                <img class="h-10 w-auto opacity-70" src="assets/logo.png" alt="Logo">
-            </div>
+    <!-- Side Menu Backdrop -->
+    <div id="menu-backdrop" onclick="closeMenu()" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity duration-300"></div>
 
-            <div class="max-w-4xl mx-auto w-full my-auto py-8 flex flex-col space-y-6 text-2xl sm:text-3xl font-extrabold uppercase tracking-wider text-black">
-                <a href="index.html" class="hover:text-[#6085a5] transition-colors">STARTSEITE</a>
-                <a href="news-und-mitteilungen.html" class="hover:text-[#6085a5] transition-colors">NEWS UND MITTEILUNGEN</a>
-                <a href="naturstein.html" class="hover:text-[#6085a5] transition-colors">NATURSTEIN</a>
-                <a href="vetroplan-glasrueckfronten.html" class="hover:text-[#6085a5] transition-colors">VETROPLAN GLASRÜCKFRONTEN</a>
-                <a href="dekton.html" class="hover:text-[#6085a5] transition-colors">DEKTON</a>
-                <a href="neolith-keramik.html" class="hover:text-[#6085a5] transition-colors">NEOLITH KERAMIK</a>
-                <a href="laminam.html" class="hover:text-[#6085a5] transition-colors">LAMINAM</a>
-                <a href="ueber-uns.html" class="hover:text-[#6085a5] transition-colors">ÜBER UNS</a>
-                <a href="kontakt-anfahrt.html" class="hover:text-[#6085a5] transition-colors">KONTAKT & ANFAHRT</a>
-                <a href="download-preislisten.html" class="hover:text-[#6085a5] transition-colors">DOWNLOAD PREISLISTEN 2025/26</a>
+    <!-- Side Menu Drawer (Golden Schnitt links, Hellblau mit weißer Schrift) -->
+    <div id="full-menu" class="fixed top-0 left-0 bottom-0 z-50 w-full sm:w-[80vw] md:w-[38vw] min-w-[300px] max-w-md bg-[#6085a5] text-white hidden flex-col justify-between p-6 sm:p-8 overflow-y-auto shadow-2xl transition-all duration-300">
+        <div class="flex items-center justify-between pb-6 border-b border-white/20">
+            <button onclick="closeMenu()" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors focus:outline-none" aria-label="Menü schließen">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <img class="h-8 sm:h-10 w-auto brightness-0 invert opacity-90" src="assets/logo.png" alt="Bäder Logo">
+        </div>
 
-                <div class="pt-8 border-t border-gray-200 flex flex-wrap gap-8 text-base font-bold text-gray-500 uppercase tracking-wider">
-                    <a href="datenschutz.html" class="hover:text-black transition-colors">DATENSCHUTZ</a>
-                    <a href="impressum.html" class="text-black font-extrabold transition-colors">IMPRESSUM</a>
-                    <a href="cookie-richtlinie.html" class="hover:text-black transition-colors">COOKIE - RICHTLINIE</a>
-                </div>
-            </div>
+        <div class="my-auto py-6 flex flex-col space-y-4 sm:space-y-5 text-lg sm:text-xl font-bold uppercase tracking-wider text-white">
+            <a href="index.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">STARTSEITE</a>
+            <a href="news-und-mitteilungen.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">NEWS UND MITTEILUNGEN</a>
+            <a href="naturstein.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">NATURSTEIN</a>
+            <a href="vetroplan-glasrueckfronten.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">VETROPLAN GLASRÜCKFRONTEN</a>
+            <a href="dekton.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">DEKTON</a>
+            <a href="neolith-keramik.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">NEOLITH KERAMIK</a>
+            <a href="laminam.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">LAMINAM</a>
+            <a href="ueber-uns.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">ÜBER UNS</a>
+            <a href="kontakt-anfahrt.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">KONTAKT & ANFAHRT</a>
+            <a href="download-preislisten.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">DOWNLOAD PREISLISTEN 2025/26</a>
 
-            <div class="max-w-4xl mx-auto w-full text-xs text-gray-400 font-light border-t border-gray-100 pt-6">
-                Eberhard Bäder Natursteine & Glas GmbH & Co. KG © 2019
+            <div class="pt-6 border-t border-white/20 flex flex-wrap gap-4 text-xs sm:text-sm font-semibold text-white/80 uppercase tracking-wider">
+                <a href="datenschutz.html" onclick="closeMenu()" class="hover:text-white transition-colors">DATENSCHUTZ</a>
+                <a href="impressum.html" onclick="closeMenu()" class="hover:text-white transition-colors">IMPRESSUM</a>
+                <a href="cookie-richtlinie.html" onclick="closeMenu()" class="hover:text-white transition-colors">COOKIE - RICHTLINIE</a>
             </div>
         </div>
 
-        <div class="w-full bg-[#7ca0ba] text-white text-sm py-2 px-8">
-            <div class="max-w-5xl mx-auto">
-                <a href="index.html" class="hover:underline">Home</a> › Impressum
-            </div>
+        <div class="text-[11px] sm:text-xs text-white/60 font-light border-t border-white/10 pt-4 mt-4">
+            Eberhard Bäder Natursteine & Glas GmbH & Co. KG © 2026
         </div>
+    </div>
 
         <main class="max-w-5xl mx-auto px-4 py-16">
             <h1 class="text-4xl text-[#6085a5] font-light mb-8">Impressum</h1>
@@ -129,12 +126,26 @@
     <script>
         function openMenu() {
             const menu = document.getElementById('full-menu');
-            menu.classList.remove('hidden');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (menu) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex');
+            }
+            if (backdrop) {
+                backdrop.classList.remove('hidden');
+            }
             document.body.style.overflow = 'hidden';
         }
         function closeMenu() {
             const menu = document.getElementById('full-menu');
-            menu.classList.add('hidden');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (menu) {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+            }
+            if (backdrop) {
+                backdrop.classList.add('hidden');
+            }
             document.body.style.overflow = '';
         }
     </script>
