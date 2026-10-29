@@ -1,321 +1,88 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naturstein | Natursteinwerk Bäder</title>
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#ffffff">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Open Sans', sans-serif; }
-        @media (min-width: 768px) { body { cursor: none; } }
-        .cursor-hover { transform: translate(-50%, -50%) scale(2.2) !important; background-color: rgba(255,255,255,0.25); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Natursteinplatten für innen und außen | Bäder Natursteine und Glas</title>
+<meta name="description" content="Von Terrassen und Treppen bis hin zu Arbeitsplatten und Waschtischen bieten unsere Natursteinplatten zahlreiche Gestaltungsmöglichkeiten.">
+<meta name="theme-color" content="#2a2e31">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/cormorant.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-white text-slate-800 antialiased min-h-screen flex flex-col justify-between">
-    <div id="customCursor" class="hidden md:block pointer-events-none fixed top-0 left-0 w-4 h-4 rounded-full border border-white z-[9999] transition-transform duration-150" style="mix-blend-mode: difference; transform: translate(-50%, -50%);"></div>
-    <div>
-    <!-- Top Header -->
-    <nav class="bg-white sticky top-0 z-40 border-b border-gray-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <button onclick="openMenu()" class="flex items-center gap-3 text-[#6085a5] hover:opacity-80 focus:outline-none group py-1 px-2 transition-colors">
-                <svg class="w-8 h-8 text-[#6085a5] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-                <span class="font-bold text-base uppercase tracking-widest text-[#6085a5] transition-colors">MENÜ</span>
-            </button>
-
-            <a href="index.html" class="flex items-center justify-end">
-                <img class="h-12 sm:h-14 w-auto object-contain" src="assets/logo.png" alt="Bäder Natursteine und Glas Logo">
-            </a>
-        </div>
-    </nav>
-
-    <!-- Side Menu Backdrop -->
-    <div id="menu-backdrop" onclick="closeMenu()" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity duration-300"></div>
-
-    <!-- Side Menu Drawer (Golden Schnitt links, Hellblau mit weißer Schrift) -->
-    <div id="full-menu" class="fixed top-0 left-0 bottom-0 z-50 w-full sm:w-[80vw] md:w-[38vw] min-w-[300px] max-w-md bg-[#6085a5] text-white hidden flex-col justify-between p-6 sm:p-8 overflow-y-auto shadow-2xl transition-all duration-300">
-        <div class="flex items-center justify-start pb-6 border-b border-white/20">
-            <button onclick="closeMenu()" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors focus:outline-none" aria-label="Menü schließen">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-
-        <div class="my-auto py-6 flex flex-col space-y-4 sm:space-y-5 text-lg sm:text-xl font-bold uppercase tracking-wider text-white">
-            <a href="index.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">STARTSEITE</a>
-            <a href="news-und-mitteilungen.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">NEWS UND MITTEILUNGEN</a>
-            <a href="naturstein.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">NATURSTEIN</a>
-            <a href="vetroplan-glasrueckfronten.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">VETROPLAN GLASRÜCKFRONTEN</a>
-            <a href="dekton.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">DEKTON</a>
-            <a href="neolith-keramik.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">NEOLITH KERAMIK</a>
-            <a href="laminam.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">LAMINAM</a>
-            <a href="ueber-uns.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">ÜBER UNS</a>
-            <a href="kontakt-anfahrt.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">KONTAKT & ANFAHRT</a>
-            <a href="download-preislisten.html" onclick="closeMenu()" class="hover:text-white/80 transition-colors">DOWNLOAD PREISLISTEN 2025/26</a>
-
-            <div class="pt-6 border-t border-white/20 flex flex-wrap gap-4 text-xs sm:text-sm font-semibold text-white/80 uppercase tracking-wider">
-                <a href="datenschutz.html" onclick="closeMenu()" class="hover:text-white transition-colors">DATENSCHUTZ</a>
-                <a href="impressum.html" onclick="closeMenu()" class="hover:text-white transition-colors">IMPRESSUM</a>
-                <a href="cookie-richtlinie.html" onclick="closeMenu()" class="hover:text-white transition-colors">COOKIE - RICHTLINIE</a>
-            </div>
-        </div>
-
-        <div class="text-[11px] sm:text-xs text-white/60 font-light border-t border-white/10 pt-4 mt-4">
-            Eberhard Bäder Natursteine & Glas GmbH & Co. KG © 2026
-        </div>
-    </div>
-
-        <main class="max-w-5xl mx-auto px-4 py-16">
-            <h1 class="text-4xl text-[#6085a5] font-light mb-8">Naturstein</h1>
-            <div class="p-8 bg-gray-50 border border-gray-200 rounded-lg text-gray-600">
-                <p class="text-lg mb-4">Erleben Sie die Vielfalt von <strong>Naturstein</strong> – Granit, Marmor, Quarzit und mehr.</p>
-                <p class="text-sm text-gray-500 mb-6">Diese Unterseite befindet sich im Aufbau. Wir bereiten umfassende Kataloge und Materialbeispiele für Sie vor.</p>
-                <div>
-                    <a href="index.html" class="inline-block bg-[#6085a5] text-white px-6 py-2 rounded text-sm uppercase tracking-wider hover:bg-[#4d6c87] transition-colors">Zurück zur Startseite</a>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <footer class="bg-[#2a2a2a] text-gray-400 py-8 text-xs mt-16">
-        <div class="max-w-5xl mx-auto px-4 flex flex-col space-y-4">
-            <p>Eberhard Bäder Natursteine und Glas GmbH & Co. KG - In den Weiden 24 - 73776 Altbach<br>Telefon +49 7153 8313-0 - Fax +49 7153 8313-20 - E-Mail info@natursteinwerk-baeder.de</p>
-            <div class="flex space-x-2 items-center">
-                <a href="impressum.html" class="hover:text-white">Impressum</a> | 
-                <a href="datenschutz.html" class="hover:text-white">Datenschutz</a> | 
-                <a href="cookie-richtlinie.html" class="hover:text-white">Cookie-Richtlinie</a> | 
-                <a href="sitemap.html" class="hover:text-white">Sitemap</a> | 
-                <a href="vertrag-widerrufen.html" class="border border-gray-400 px-2 py-1 rounded hover:text-white hover:border-white transition-colors">Vertrag widerrufen</a>
-            </div>
-            <p>©2019 Alle Rechte vorbehalten.</p>
-        </div>
-    </footer>
-
-    <!-- Chatbot Widget Systemweit -->
-    <div id="chatbot-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-        <!-- Chat Window -->
-        <div id="chat-window" class="hidden w-[90vw] sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden mb-4 transition-all duration-300 transform scale-95 origin-bottom-right opacity-0">
-            <!-- Chat Header -->
-            <div class="bg-[#6085a5] text-white p-4 flex items-center justify-between shadow-md">
-                <div class="flex items-center space-x-3">
-                    <div class="relative">
-                        <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm">
-                            💬
-                        </div>
-                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-[#6085a5] rounded-full"></span>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold text-sm leading-tight">Bäder Assistenz</h3>
-                        <p class="text-[11px] text-white/80">Online | Schnelle Hilfe</p>
-                    </div>
-                </div>
-                <button onclick="toggleChatbot()" class="text-white/80 hover:text-white p-1 focus:outline-none transition-colors" aria-label="Chat schließen">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Messages Container -->
-            <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-3 bg-slate-50 text-xs sm:text-sm">
-                <div class="flex items-start space-x-2">
-                    <div class="w-7 h-7 rounded-full bg-[#6085a5] text-white flex items-center justify-center text-xs flex-shrink-0 font-bold">
-                        B
-                    </div>
-                    <div class="bg-white border border-gray-100 p-3 rounded-2xl rounded-tl-none text-gray-700 shadow-sm max-w-[85%] leading-relaxed">
-                        Guten Tag! 👋 Willkommen bei Eberhard Bäder Natursteine & Glas. Wie kann ich Ihnen heute weiterhelfen?
-                    </div>
-                </div>
-
-                <div id="chat-suggestions" class="flex flex-wrap gap-1.5 pt-1 pl-9">
-                    <button onclick="sendQuickReply('Öffnungszeiten & Standort')" class="bg-white hover:bg-sky-50 text-[#6085a5] border border-[#6085a5]/30 px-2.5 py-1 rounded-full text-xs font-medium transition-colors shadow-xs">📍 Öffnungszeiten</button>
-                    <button onclick="sendQuickReply('Materialberatung')" class="bg-white hover:bg-sky-50 text-[#6085a5] border border-[#6085a5]/30 px-2.5 py-1 rounded-full text-xs font-medium transition-colors shadow-xs">🪨 Materialien</button>
-                    <button onclick="sendQuickReply('Preisliste 2025/26')" class="bg-white hover:bg-sky-50 text-[#6085a5] border border-[#6085a5]/30 px-2.5 py-1 rounded-full text-xs font-medium transition-colors shadow-xs">📄 Preislisten</button>
-                    <button onclick="sendQuickReply('Kontakt')" class="bg-white hover:bg-sky-50 text-[#6085a5] border border-[#6085a5]/30 px-2.5 py-1 rounded-full text-xs font-medium transition-colors shadow-xs">✉️ Kontakt</button>
-                </div>
-            </div>
-
-            <!-- Input Bar -->
-            <form id="chat-form" onsubmit="handleChatSubmit(event)" class="p-3 bg-white border-t border-gray-100 flex items-center gap-2">
-                <input type="text" id="chat-input" placeholder="Ihre Frage eintippen..." class="flex-1 text-xs sm:text-sm px-3 py-2 border border-gray-200 rounded-full focus:outline-none focus:border-[#6085a5] bg-gray-50 focus:bg-white transition-colors" autocomplete="off">
-                <button type="submit" class="w-8 h-8 rounded-full bg-[#6085a5] hover:bg-[#4d6c87] text-white flex items-center justify-center flex-shrink-0 transition-colors focus:outline-none shadow">
-                    <svg class="w-4 h-4 transform rotate-90" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                    </svg>
-                </button>
-            </form>
-        </div>
-
-        <!-- Floating Chat Button -->
-        <button onclick="toggleChatbot()" id="chat-toggle-btn" class="w-14 h-14 rounded-full bg-[#6085a5] hover:bg-[#4d6c87] text-white shadow-xl flex items-center justify-center transition-transform hover:scale-105 active:scale-95 focus:outline-none group relative" aria-label="Chat öffnen">
-            <svg id="chat-icon-open" class="w-6 h-6 transition-transform group-hover:rotate-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-            </svg>
-            <svg id="chat-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-            <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-400 border-2 border-white rounded-full"></span>
-        </button>
-    </div>
-
-    <!-- Page Scripts -->
-    <script>
-        function openMenu() {
-            const menu = document.getElementById('full-menu');
-            const backdrop = document.getElementById('menu-backdrop');
-            if (menu) {
-                menu.classList.remove('hidden');
-                menu.classList.add('flex');
-            }
-            if (backdrop) {
-                backdrop.classList.remove('hidden');
-            }
-            document.body.style.overflow = 'hidden';
-        }
-        function closeMenu() {
-            const menu = document.getElementById('full-menu');
-            const backdrop = document.getElementById('menu-backdrop');
-            if (menu) {
-                menu.classList.add('hidden');
-                menu.classList.remove('flex');
-            }
-            if (backdrop) {
-                backdrop.classList.add('hidden');
-            }
-            document.body.style.overflow = '';
-        }
-
-        /* --- Chatbot Widget Controller (Modular) --- */
-        function toggleChatbot() {
-            const win = document.getElementById('chat-window');
-            const openIcon = document.getElementById('chat-icon-open');
-            const closeIcon = document.getElementById('chat-icon-close');
-            
-            if (win.classList.contains('hidden')) {
-                win.classList.remove('hidden');
-                setTimeout(() => {
-                    win.classList.remove('scale-95', 'opacity-0');
-                    win.classList.add('scale-100', 'opacity-100');
-                }, 10);
-                openIcon.classList.add('hidden');
-                closeIcon.classList.remove('hidden');
-                document.getElementById('chat-input')?.focus();
-            } else {
-                win.classList.remove('scale-100', 'opacity-100');
-                win.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    win.classList.add('hidden');
-                }, 200);
-                openIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-            }
-        }
-
-        function sendQuickReply(text) {
-            appendUserMessage(text);
-            processBotReply(text);
-        }
-
-        function handleChatSubmit(e) {
-            e.preventDefault();
-            const input = document.getElementById('chat-input');
-            const text = input.value.trim();
-            if (!text) return;
-            input.value = '';
-            appendUserMessage(text);
-            processBotReply(text);
-        }
-
-        function appendUserMessage(text) {
-            const msgContainer = document.getElementById('chat-messages');
-            const userDiv = document.createElement('div');
-            userDiv.className = 'flex items-end justify-end space-x-2 pt-2';
-            userDiv.innerHTML = `
-                <div class="bg-[#6085a5] text-white p-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%] text-xs sm:text-sm">
-                    ${escapeHtml(text)}
-                </div>
-            `;
-            msgContainer.appendChild(userDiv);
-            msgContainer.scrollTop = msgContainer.scrollHeight;
-        }
-
-        function processBotReply(userQuery) {
-            const msgContainer = document.getElementById('chat-messages');
-            
-            const typingDiv = document.createElement('div');
-            typingDiv.id = 'bot-typing';
-            typingDiv.className = 'flex items-start space-x-2 pt-2';
-            typingDiv.innerHTML = `
-                <div class="w-7 h-7 rounded-full bg-[#6085a5] text-white flex items-center justify-center text-xs flex-shrink-0 font-bold">B</div>
-                <div class="bg-white border border-gray-100 p-3 rounded-2xl rounded-tl-none text-gray-400 shadow-sm flex items-center space-x-1">
-                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></span>
-                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
-                </div>
-            `;
-            msgContainer.appendChild(typingDiv);
-            msgContainer.scrollTop = msgContainer.scrollHeight;
-
-            setTimeout(() => {
-                document.getElementById('bot-typing')?.remove();
-                
-                let replyText = getDummyBotResponse(userQuery);
-                
-                const botDiv = document.createElement('div');
-                botDiv.className = 'flex items-start space-x-2 pt-2';
-                botDiv.innerHTML = `
-                    <div class="w-7 h-7 rounded-full bg-[#6085a5] text-white flex items-center justify-center text-xs flex-shrink-0 font-bold">B</div>
-                    <div class="bg-white border border-gray-100 p-3 rounded-2xl rounded-tl-none text-gray-700 shadow-sm max-w-[85%] text-xs sm:text-sm leading-relaxed">
-                        ${replyText}
-                    </div>
-                `;
-                msgContainer.appendChild(botDiv);
-                msgContainer.scrollTop = msgContainer.scrollHeight;
-            }, 700);
-        }
-
-        function getDummyBotResponse(query) {
-            const q = query.toLowerCase();
-            if (q.includes('öffnungszeit') || q.includes('zeit') || q.includes('standort') || q.includes('wo') || q.includes('anfahrt') || q.includes('geöffnet') || q.includes('wann')) {
-                return "📍 <strong>Standort & Geschäftszeiten:</strong><br>Eberhard Bäder Natursteine und Glas GmbH & Co. KG<br>In den Weiden 24, 73776 Altbach<br><br>🕒 <strong>Öffnungszeiten:</strong><br>• Mo – Mi: 08:00 – 12:20 & 13:00 – 17:00 Uhr<br>• <strong>Donnerstag:</strong> 08:00 – 12:20 & 13:00 – 18:00 Uhr<br>• Fr: 08:00 – 12:20 & 13:00 – 17:00 Uhr<br><br>📞 Tel: +49 7153 8313-0";
-            }
-            if (q.includes('preis') || q.includes('kosten') || q.includes('angebot') || q.includes('tarif') || q.includes('aufmaß') || q.includes('montage') || q.includes('lieferung') || q.includes('rabatt') || q.includes('aktion')) {
-                return "📄 <strong>Auszug aus der Preisliste 2025/26:</strong><br>• <strong>Aufmaß & CAD:</strong> 110 € (bis 3m²), 89 € (bis 5m²), 75 € (>5m²)<br>• <strong>Montage:</strong> 226 € (bis 3m²), 194,50 € (bis 5m²), 160 € (>5m²)<br>• <strong>Lieferung:</strong> Regional 34 €, Überregional 76,50 €<br>• <strong>Natursteine:</strong> ab 247 €/m² (z.B. Rosa Beta)<br>• <strong>Vetroplan Glas:</strong> ab 251 €/m²<br>• <strong>Dekton Keramik:</strong> ab 517 €/m² (Aktionspreise!)<br>• <strong>Neolith EASY Aktion:</strong> 500 € Gutschrift bei 5 Platten!<br><br>Details auf der <a href='download-preislisten.html' class='text-[#6085a5] underline font-semibold'>Download-Seite</a>.";
-            }
-            if (q.includes('material') || q.includes('naturstein') || q.includes('dekton') || q.includes('neolith') || q.includes('laminam') || q.includes('glas') || q.includes('granit')) {
-                return "🪨 Wir führen über 80 Natursteine (Granit, Marmor), Vetroplan Glasrückwände & Arbeitsplatten, Dekton, Neolith Keramik, SapienStone & Laminam. Schauen Sie in unser Hauptmenü für Detailkataloge!";
-            }
-            if (q.includes('kontakt') || q.includes('telefon') || q.includes('mail') || q.includes('anfragen') || q.includes('team') || q.includes('ansprechpartner')) {
-                return "✉️ <strong>Direktkontakt:</strong><br>E-Mail: <a href='mailto:info@natursteinwerk-baeder.de' class='text-[#6085a5] underline'>info[at]natursteinwerk-baeder.de</a><br>Telefon Zentrale: <strong>+49 7153 8313-0</strong><br>David Bäder (GL): 07153 8313-19<br>Gerd Hofmann (Außendienst): 0152 05360590<br><br>Alle Kontakte auf der <a href='kontakt-anfahrt.html#team' class='text-[#6085a5] underline font-semibold'>Team-Seite</a>.";
-            }
-            return "Vielen Dank für Ihre Nachricht! Dies ist unser KI-Assistent. Bei allen Fragen zu Naturstein, Glasrückwänden, Keramik und Angeboten stehen wir Ihnen unter <strong>+49 7153 8313-0</strong> oder per E-Mail gerne zur Verfügung.";
-        }
-
-        function escapeHtml(str) {
-            return str.replace(/[&<>"']/g, function(m) {
-                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
-            });
-        }
-
-        const cursor = document.getElementById('customCursor');
-        if (cursor) {
-            window.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
-            document.querySelectorAll('a, button').forEach((el) => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
-            });
-        }
-    </script>
+<body>
+<a class="sr-skip" href="#inhalt" style="position:absolute;left:-9999px">Zum Inhalt springen</a>
+<div class="topbar"><div class="wrap">
+  <span class="hide-sm">Mo–Mi &amp; Fr 8.00–17.00 Uhr · Do bis 18.00 Uhr</span>
+  <a href="tel:+49715383130">Tel. 07153 8313-0</a>
+  <a class="hide-xs" href="mailto:info@natursteinwerk-baeder.de">info@natursteinwerk-baeder.de</a>
+</div></div>
+<header class="header"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="Startseite"><img src="assets/logo.png" width="626" height="209" alt="Bäder Natursteine und Glas"></a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="hauptmenue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menü</span></button>
+  <nav aria-label="Hauptmenü"><ul class="nav" id="hauptmenue"><li><button class="nav-link is-active" type="button" aria-expanded="false" aria-controls="dd0">Naturstein &amp; Keramik<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><ul class="dropdown" id="dd0"><li><a class=" is-active" aria-current="page" href="naturstein.html">Naturstein</a></li><li><a class="" href="silestone.html">Silestone</a></li><li><a class="" href="lightstone.html">Lightstone</a></li><li><a class="" href="neolith-keramik.html">Neolith Keramik</a></li><li><a class="" href="dekton.html">Dekton</a></li><li><a class="" href="laminam.html">Laminam</a></li></ul></li><li><button class="nav-link" type="button" aria-expanded="false" aria-controls="dd1">Glas<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><ul class="dropdown" id="dd1"><li><a class="" href="vetroplan-glasrueckfronten.html">Vetroplan Glasrückfronten</a></li><li><a class="sub" href="vetroplan-basic-line.html">Basic Line</a></li><li><a class="sub" href="vetroplan-trend-line.html">Trend Line</a></li><li><a class="sub" href="vetroplan-steel-art-line.html">Steel Art Line</a></li><li><a class="sub" href="vetroplan-life-line.html">Life Line</a></li><li><a class="sub" href="vetroplan-digital-print-line.html">Digital Print Line</a></li></ul></li><li><button class="nav-link" type="button" aria-expanded="false" aria-controls="dd2">Unternehmen<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><ul class="dropdown" id="dd2"><li><a class="" href="ueber-uns.html">Über uns &amp; Chronik</a></li><li><a class="" href="team.html">Unser Team</a></li><li><a class="" href="raeumlichkeiten.html">Unsere Räumlichkeiten</a></li><li><a class="" href="news-und-mitteilungen.html">News und Mitteilungen</a></li></ul></li><li><button class="nav-link" type="button" aria-expanded="false" aria-controls="dd3">Downloads<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><ul class="dropdown" id="dd3"><li><a class="" href="downloads.html">Downloadcenter</a></li><li><a class="" href="downloads.html#bilddatenbank">Bilddatenbank Naturstein</a></li><li><a class="" href="download-preislisten.html">Preisliste 2025/26</a></li></ul></li><li><a class="nav-link" href="kontakt-anfahrt.html">Kontakt &amp; Anfahrt</a></li><li><a class="btn" href="tel:+49715383130"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Anrufen</a></li></ul></nav>
+</div></header>
+<main id="inhalt">
+<section class="hero hero--small"><img src="assets/img/naturstein-09.jpg" width="1600" height="981" alt="" class="hero-bg"><div class="wrap"><span class="eyebrow">Naturstein</span><h1>Natursteinplatten für innen und außen</h1><p class="lead">Egal, ob im Innen- oder Außenbereich – Natursteinplatten überzeugen durch Langlebigkeit und eine individuelle, wandelbare Optik.</p></div></section><section class="section "><div class="wrap"><div class="split"><div><p class="lead">Von Terrassen über Wege und Treppen bis hin zu <a href="lightstone.html">Arbeitsplatten</a> und Waschtischen bietet Naturstein zahlreiche Gestaltungsmöglichkeiten für Ihren Wohnraum.</p><p>Ob Sie eine kühle, zeitlose Optik bevorzugen oder eine warme Atmosphäre schätzen, spielt dabei keine Rolle – je nach Material und Oberflächenbearbeitung können unsere Natursteinplatten unterschiedliche Wirkungen erzielen.</p><p><b>Steigern Sie das Ambiente Ihres Wohnbereiches und lassen Sie sich bei uns in Altbach beraten!</b></p></div><div class="grid grid-2"><figure><div class="photo "><img src="assets/img/naturstein-01.jpg" width="528" height="352" alt="Küche mit Granitarbeitsplatte" loading="lazy" decoding="async"></div></figure><figure><div class="photo "><img src="assets/img/naturstein-02.jpg" width="528" height="352" alt="Granitarbeitsplatte im Detail" loading="lazy" decoding="async"></div></figure></div></div></div></section><section class="section section--white"><div class="wrap"><div class="split split--top"><div><h2>Wir bieten Ihnen Natursteinplatten aus aller Welt</h2><p>Bei Eberhard Bäder Natursteine und Glas in der Nähe von Stuttgart erwarten Sie hochwertige Natursteinplatten für jeden Anspruch. Unsere Natursteine kommen aus aller Welt, insbesondere aus Indien, Afrika, Brasilien, Italien, Spanien und China. Nennen Sie uns Ihre Wünsche und Anforderungen – wir finden garantiert die passende Natursteinplatte für Sie!</p><p>Natursteine bestechen durch ihren individuellen Charakter: Kein Stein gleicht dem anderen in Zusammensetzung, Maserung und Färbung. Unsere Platten sind hitzeunempfindlich, robust und pflegeleicht und werden nicht zuletzt aufgrund ihrer zahlreichen Gestaltungsmöglichkeiten von unseren Kunden geschätzt.</p><p>Rufen Sie uns bei weiteren Fragen gerne an oder besuchen Sie unsere <a href="raeumlichkeiten.html#ausstellung">Ausstellung</a> in Altbach, ganz in der Nähe von Stuttgart!</p></div><div class="facts"><div class="fact"><b>250–280 cm</b><span>Plattenlänge, in Ausnahmefällen bis zu 310 cm</span></div><div class="fact"><b>20 und 30 mm</b><span>Lieferbare Plattenstärken</span></div><div class="fact"><b>Poliert</b><span>oder in leathertouch, teilweise auch in forto (geflammt und gebürstet)</span></div><div class="fact"><b>Weltweit</b><span>Indien, Afrika, Brasilien, Italien, Spanien und China</span></div></div></div></div></section><section class="section "><div class="wrap"><div class="head"><span class="eyebrow">Fertigung in Altbach</span><h2>Vom Rohblock zur fertigen Platte</h2></div><div class="gallery"><figure><a href="assets/img/naturstein-03.jpg" data-zoom="" aria-label="Bild vergrößern"><div class="photo "><img src="assets/img/naturstein-03.jpg" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div></a></figure><figure><a href="assets/img/naturstein-04.jpg" data-zoom="" aria-label="Bild vergrößern"><div class="photo "><img src="assets/img/naturstein-04.jpg" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div></a></figure><figure><a href="assets/img/naturstein-05.jpg" data-zoom="" aria-label="Bild vergrößern"><div class="photo "><img src="assets/img/naturstein-05.jpg" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div></a></figure><figure><a href="assets/img/naturstein-06.jpg" data-zoom="" aria-label="Bild vergrößern"><div class="photo "><img src="assets/img/naturstein-06.jpg" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div></a></figure><figure><a href="assets/img/naturstein-07.jpg" data-zoom="" aria-label="Bild vergrößern"><div class="photo "><img src="assets/img/naturstein-07.jpg" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div></a></figure><figure><a href="assets/img/naturstein-08.jpg" data-zoom="" aria-label="Bild vergrößern"><div class="photo "><img src="assets/img/naturstein-08.jpg" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div></a></figure></div></div></section><section class="section section--white"><div class="wrap"><div class="split split--top"><div><div class="head"><span class="eyebrow">Sortiment</span><h2>Diese Materialien haben wir im Sortiment</h2><p class="lead">Alle Sorten können Sie vor Ort ansehen und reservieren. Bilder vieler Sorten finden Sie in unserer <a href="downloads.html#bilddatenbank">Bilddatenbank</a>.</p></div><div class="color-group"><h4><span class="dot" style="background:#2b2b2b"></span>Dunkle Granitsteine</h4><ul class="chips"><li>Angola Schwarz</li><li>Blue in the night</li><li>Brown Antic</li><li>China Impala</li><li>Coffee Imperiale</li><li>Emerald Pearl</li><li>Impala</li><li>Marinace</li><li>Marinace Gold</li><li>Matrix</li><li>Mystic Grey</li><li>Nero Assoluto</li><li>Nero India</li><li>Nero Marcos</li><li>Nordic Sunset</li><li>Padang Dunkel</li><li>Silver Black</li><li>Spectrolith</li><li>Star Galaxy</li><li>Steel Grey</li><li>Virginia Black</li></ul></div><div class="color-group"><h4><span class="dot" style="background:#f4f2ee"></span>Weiße Granitsteine</h4><ul class="chips"><li>Azul Aran</li><li>Bethel White</li><li>Bianco Kristall</li><li>Bianco Sardo</li><li>Imperial White</li><li>Meera White</li><li>Monte Rosa</li><li>Serizzo</li><li>Viscont White</li></ul></div><div class="color-group"><h4><span class="dot" style="background:#9a9a98"></span>Graue Granitsteine</h4><ul class="chips"><li>Azul California</li><li>Basaltino</li><li>Grigio Carnico</li><li>Onsernone</li><li>Padang hell</li><li>Padang Kristall</li><li>Padang Rosa</li><li>Quarzit Silber</li><li>Rosa Beta</li><li>Super Grey</li></ul></div><div class="color-group"><h4><span class="dot" style="background:#56715a"></span>Grüne Granitsteine</h4><ul class="chips"><li>Ice Green</li><li>Kashmir White</li><li>Verde Maritaca</li><li>Verde Oliva</li><li>Verde Spluga</li><li>Tropic Brown</li><li>Verde Eucalyptus</li></ul></div><div class="color-group"><h4><span class="dot" style="background:#e8dcc0"></span>Cremefarbige Granitsteine</h4><ul class="chips"><li>Jura Gelb-Kalkstein</li></ul></div><div class="color-group"><h4><span class="dot" style="background:#93463a"></span>Rote Granitsteine</h4><ul class="chips"><li>Aurora India</li><li>Balmoral</li><li>Multicolor Rot</li><li>Rosa Porrinho</li><li>Rosa Sardo</li><li>Tan Brown</li></ul></div><div class="color-group"><h4><span class="dot" style="background:#3d5873"></span>Blaue Granitsteine</h4><ul class="chips"><li>Azul Macaubas</li><li>Azul Noce</li><li>Azul Platino</li><li>Baltic Blau</li><li>Blue Eyes</li><li>Fantastic Blue</li><li>Labrador Antic</li><li>Labrador Blue Pearl</li><li>Labrador Hell</li><li>Orissa Blue</li><li>Vitzag Blue</li></ul></div><div class="color-group"><h4><span class="dot" style="background:#6b4a33"></span>Braune Granitsteine</h4><ul class="chips"><li>Baltic Braun</li><li>Breccia Imperiale</li><li>Coffestone</li><li>Fox Brown</li><li>Giallo Venezia</li><li>Quarzit Brown</li><li>Teak Stone</li></ul></div><div class="color-group"><h4><span class="dot" style="background:linear-gradient(135deg,#c79a5a,#7c5a8a,#4f7b6b)"></span>Bunte Granitsteine</h4><ul class="chips"><li>Belorizonte</li><li>Incas Gold</li><li>Ivory Brown</li><li>Juparana Colombo</li><li>Juparana India</li><li>Kinawa</li><li>Melur Melody</li><li>Padang Gelb</li><li>Paradiso</li><li>Pegasus</li></ul></div></div><div class="stack"><div class="photo photo--tall"><img src="assets/img/naturstein-10.jpg" width="1600" height="2400" alt="Bearbeitung einer Natursteinplatte" loading="lazy" decoding="async"></div><div class="photo photo--wide"><img src="assets/img/naturstein-09.jpg" width="1600" height="981" alt="Natursteinplatten im Lager" loading="lazy" decoding="async"></div></div></div></div></section><section class="section "><div class="wrap"><div class="narrow"><div class="head"><span class="eyebrow">Technik</span><h2>Kantenprofile, Ausschnitte &amp; Sonstiges</h2></div><details class="acc" open><summary>Kantenprofile</summary><div class="acc-body"><ul class=""><li><b>Profil 1:</b> Oberseite 1/4 Rundung, unten Fasen und Unterseite 50 mm Tiefe geschliffen</li><li><b>Profil 2:</b> Vorderseite 1/2 Rundung, unten Fasen und Unterseite 50 mm Tiefe geschliffen</li><li><b>Profil 3:</b> Vorderseite Buchrückenform und Unterseite 50 mm Tiefe geschliffen</li><li><b>Profil 4:</b> Oberseite 10 mm Fasen, unten Fasen und Unterseite 50 mm geschliffen</li><li><b>Profil 5:</b> Oberseite und Unterseite mit Fasen 3 mm und Unterseite 50 mm Tiefe geschliffen.</li><li><b>Profil 6:</b> Oberseite und Unterseite mit Rundung 3 mm und Unterseite 50 mm Tiefe geschliffen.</li><li><b>Profil 9:</b> Schürzenprofil auf Gehrung verklebt, oben und unten gefast oder gerundet.</li><li><b>Profil Stratos:</b> Oben und unten gefast und poliert, unten ist ein eloxiertes Aluprofil angeklebt.</li></ul></div></details><details class="acc"><summary>Mögliche Ausschnitte</summary><div class="acc-body"><ul class=""><li>Viereck gesägt für Auflageteile; Viereck flächenbündige Teile; Viereck für Unterbauteile</li><li>Softeck gesägt für Auflageteile; Softeck flächenbündige Teile; Softeck für Unterbauteile</li><li>Rund gesägt für Auflageteile; Rund flächenbündige Teile; Rund für Unterbauteile</li><li>Eckspülenausschnitt gesägt für Aufbauteile; Eckspülenausschnitt für flächenbündige Teile</li><li>Ovalausschnitt gesägt für Auflageteile; Ovalausschnitt für Unterbauteile</li><li>Ablaufrillen ca. 400 x 10 mm</li></ul></div></details><details class="acc"><summary>Sonstiges</summary><div class="acc-body"><p>Wandabschlussprofile in einer Höhe von 30 bis 100 mm und einer Stärke von 12 mm nach Kundenwunsch.</p></div></details></div></div></section><section class="section section--dark"><div class="wrap"><div class="center narrow" style="margin:0 auto"><span class="eyebrow">Persönlich für Sie da</span><h2>Lassen Sie sich beraten</h2><p class="lead">Besuchen Sie unsere Ausstellung in Altbach oder rufen Sie uns an – wir beraten Sie gerne persönlich.</p><div class="btns" style="justify-content:center"><a class="btn btn--light" href="tel:+49715383130"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>07153 8313-0 anrufen</a><a class="btn btn--ghost btn--on-dark" href="kontakt-anfahrt.html">Kontakt &amp; Anfahrt</a></div></div></div></section>
+</main>
+<footer class="footer"><div class="wrap">
+<div class="footer-grid">
+  <div>
+    <a class="footer-logo" href="index.html"><img src="assets/logo.png" width="626" height="209" alt="Bäder Natursteine und Glas" loading="lazy" decoding="async"></a>
+    <p>Eberhard Bäder Natursteine und Glas GmbH &amp; Co. KG<br>In den Weiden 24<br>73776 Altbach</p>
+    <p>Telefon <a href="tel:+49715383130">+49 7153 8313-0</a><br>Fax +49 7153 8313-20<br>E-Mail <a href="mailto:info@natursteinwerk-baeder.de">info@natursteinwerk-baeder.de</a></p>
+  </div>
+  <div>
+    <h4>Öffnungszeiten</h4>
+    <p>Montag bis Mittwoch und Freitag<br>8.00–12.20 Uhr und 13.00–17.00 Uhr</p>
+    <p>Donnerstag<br>8.00–12.20 Uhr und 13.00–18.00 Uhr</p>
+  </div>
+  <div>
+    <h4>Materialien</h4>
+    <ul>
+      <li><a href="naturstein.html">Naturstein</a></li>
+      <li><a href="silestone.html">Silestone</a></li>
+      <li><a href="lightstone.html">Lightstone</a></li>
+      <li><a href="neolith-keramik.html">Neolith Keramik</a></li>
+      <li><a href="dekton.html">Dekton</a></li>
+      <li><a href="laminam.html">Laminam</a></li>
+      <li><a href="vetroplan-glasrueckfronten.html">Vetroplan Glas</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Unternehmen</h4>
+    <ul>
+      <li><a href="ueber-uns.html">Über uns</a></li>
+      <li><a href="ueber-uns.html#chronik">Chronik</a></li>
+      <li><a href="team.html">Unser Team</a></li>
+      <li><a href="raeumlichkeiten.html">Räumlichkeiten</a></li>
+      <li><a href="downloads.html">Downloads</a></li>
+      <li><a href="kontakt-anfahrt.html">Kontakt &amp; Anfahrt</a></li>
+    </ul>
+  </div>
+</div>
+<div class="footer-bottom">
+  <span>©2019 Alle Rechte vorbehalten.</span>
+  <nav aria-label="Rechtliches">
+    <a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="cookie-richtlinie.html">Cookie-Richtlinie</a><a href="sitemap.html">Sitemap</a><a href="gewaehrleistung.html">Gesetzliche Gewährleistung</a><a href="vertrag-widerrufen.html">Vertrag widerrufen</a>
+  </nav>
+</div>
+</div></footer>
+<button class="help-btn" type="button" aria-expanded="false" aria-controls="hilfe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Schnelle Hilfe</span></button>
+<div class="help" id="hilfe" role="dialog" aria-label="Schnelle Hilfe">
+  <div class="help-head"><div><b>Bäder Assistenz</b><small>Schnelle Antworten</small></div><button type="button" aria-label="Schließen">×</button></div>
+  <div class="help-body"><div class="msg">Guten Tag! Willkommen bei Bäder Natursteine und Glas. Wobei können wir helfen? Tippen Sie auf ein Thema.</div></div>
+  <div class="help-quick">
+    <button type="button" data-q="zeiten">Öffnungszeiten</button>
+    <button type="button" data-q="materialien">Materialien</button>
+    <button type="button" data-q="preise">Preise</button>
+    <button type="button" data-q="kontakt">Kontakt</button>
+  </div>
+</div>
+<script src="main.js" defer></script>
 </body>
 </html>
