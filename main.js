@@ -121,4 +121,111 @@
       });
     });
   }
+
+  // ------------------------------------------------ Bewegung
+  var anim = document.documentElement.classList.contains('anim');
+
+  // Logo zeichnet sich einmal pro Besuch
+  var brand = document.querySelector('.header .brand');
+  if (brand && anim) {
+    var seen = false;
+    try { seen = sessionStorage.getItem('logo-seen') === '1'; sessionStorage.setItem('logo-seen', '1'); } catch (e) {}
+    if (!seen) brand.classList.add('is-intro');
+  }
+
+  // Kopfzeile wird beim Scrollen schlanker
+  var ticking = false;
+  var heroImg = document.querySelector('.hero img.hero-bg');
+  var timelines = document.querySelectorAll('.timeline');
+  function onScroll() {
+    var y = window.scrollY;
+    header.classList.toggle('is-scrolled', y > 40);
+    if (anim && heroImg && y < 1200) {
+      heroImg.style.translate = '0 ' + Math.round(y * 0.22) + 'px';
+    }
+    timelines.forEach(function (tl) {
+      var r = tl.getBoundingClientRect();
+      var mid = window.innerHeight * 0.6;
+      var p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
+      tl.style.setProperty('--p', p.toFixed(3));
+      tl.querySelectorAll('li').forEach(function (li) {
+        li.classList.toggle('passed', li.getBoundingClientRect().top < mid);
+      });
+    });
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  // Inhalte beim Scrollen sanft einblenden
+  if (anim && 'IntersectionObserver' in window) {
+    var sel = '.head, .card, .tile, .fact, .swatch, .stone, .gallery figure, .timeline li, .notice, .file, .split > div, .color-group, details.acc, .table-wrap, .chips, .subnav, .framed';
+    var picked = [];
+    document.querySelectorAll('main ' + sel).forEach(function (el) {
+      if (el.closest('.hero, .page-head')) return;
+      for (var i = 0; i < picked.length; i++) { if (picked[i].contains(el)) return; }
+      picked.push(el);
+    });
+    var vh = window.innerHeight;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    picked.forEach(function (el) {
+      if (el.getBoundingClientRect().top < vh * 0.92) return; // schon sichtbar: nicht verstecken
+      var sib = Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.style.setProperty('--d', Math.min(sib, 6) * 0.07 + 's');
+      el.classList.add('rv');
+      io.observe(el);
+    });
+    // große Bilder: von unten aufdecken
+    document.querySelectorAll('main .split .photo, main .hero ~ section .photo--wide').forEach(function (ph) {
+      if (ph.closest('.rv') || ph.getBoundingClientRect().top < vh * 0.92) return;
+      ph.classList.add('rv-img');
+      io.observe(ph);
+    });
+    // Facetten-Motiv im dunklen Abschnitt zeichnet sich, sobald sichtbar
+    document.querySelectorAll('.section--cta').forEach(function (s) {
+      new IntersectionObserver(function (en, o) {
+        if (en[0].isIntersecting) { s.classList.add('in-view'); o.disconnect(); }
+      }, { threshold: 0.3 }).observe(s);
+    });
+    // Zahlen zählen hoch (nur einzelne Zahl, z. B. „ca. 1.600“)
+    document.querySelectorAll('.fact b').forEach(function (b) {
+      var m = b.textContent.match(/\d[\d.]*/g);
+      if (!m || m.length !== 1) return;
+      var raw = m[0], target = parseInt(raw.replace(/\./g, ''), 10);
+      if (!target || target < 3) return;
+      var fmt = function (n) { return raw.indexOf('.') > -1 ? n.toLocaleString('de-DE') : String(n); };
+      var orig = b.textContent;
+      new IntersectionObserver(function (en, o) {
+        if (!en[0].isIntersecting) return;
+        o.disconnect();
+        var t0 = performance.now();
+        (function step(t) {
+          var k = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+          b.textContent = orig.replace(raw, fmt(Math.round(target * e)));
+          if (k < 1) requestAnimationFrame(step); else b.textContent = orig;
+        })(t0);
+      }, { threshold: 0.6 }).observe(b);
+    });
+  }
+
+  // Glanz auf den Material-Kacheln folgt der Maus
+  document.querySelectorAll('.tile').forEach(function (t) {
+    var ph = t.querySelector('.photo');
+    t.addEventListener('pointermove', function (e) {
+      var r = ph.getBoundingClientRect();
+      ph.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      ph.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // Ein Gruß für Neugierige in der Entwicklerkonsole
+  if (window.console && console.log) {
+    console.log('%cBÄDER%c  Stein auf Stein – seit 1926 in Altbach.', 'font:700 16px sans-serif;color:#7096ba;letter-spacing:2px', 'color:#5b6267');
+  }
 })();

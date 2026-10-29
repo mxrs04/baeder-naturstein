@@ -98,9 +98,10 @@ def acc(title, body, open_=False):
     return f'<details class="acc"{" open" if open_ else ""}><summary>{title}</summary><div class="acc-body">{body}</div></details>'
 
 
-def section(inner, cls="", id_=None):
+def section(inner, cls="", id_=None, deco=False):
     i = f' id="{id_}"' if id_ else ""
-    return f'<section class="section {cls}"{i}><div class="wrap">{inner}</div></section>'
+    d = DECO if deco else ""
+    return f'<section class="section {cls}"{i}>{d}<div class="wrap">{inner}</div></section>'
 
 
 def head(eyebrow, title, lead="", center=False, tag="h2"):
@@ -120,7 +121,7 @@ def hero(image, eyebrow, title, lead="", buttons="", small=True, home=False):
 def page_head(crumbs, title, lead=""):
     c = " / ".join(f'<a href="{h}">{t}</a>' if h else t for t, h in crumbs)
     l = f'<p class="lead">{lead}</p>' if lead else ""
-    return f'<section class="page-head"><div class="wrap"><div class="crumbs">{c}</div><h1>{title}</h1>{l}</div></section>'
+    return f'<section class="page-head">{DECO}<div class="wrap"><div class="crumbs">{c}</div><h1>{title}</h1>{l}</div></section>'
 
 
 def btn(text, href, kind="", ext=False):
@@ -156,7 +157,26 @@ def cta(title="Lassen Sie sich beraten", text="Besuchen Sie unsere Ausstellung i
         + btns(btn(ICON_PHONE + "07153 8313-0 anrufen", f"tel:{TEL_LINK}", "light"),
                btn("Kontakt &amp; Anfahrt", "kontakt-anfahrt.html", "ghost").replace("btn--ghost", "btn--ghost btn--on-dark"))
         .replace('class="btns"', 'class="btns" style="justify-content:center"') + "</div>",
-        "section--dark")
+        "section--dark section--cta", deco=True)
+
+
+def logo(cls=""):
+    """Logo als Vektor (keine Bildkanten), animiert über style.css."""
+    letters = "".join(f'<span style="--i:{i}">{ch}</span>' for i, ch in enumerate("BÄDER"))
+    return (f'<span class="brand {cls}" aria-hidden="true">'
+            '<svg class="brand-mark" viewBox="0 0 105 97">'
+            '<path class="bm-face" d="M53 4 L20 93 L85 93 Z"/>'
+            '<path class="bm-out" pathLength="1" d="M53 4 L4 65 L20 93 L85 93 L101 65 Z"/>'
+            '<path class="bm-in" pathLength="1" d="M20 93 L53 4 L85 93"/>'
+            '<path class="bm-glint" d="M53 -9 L55 2 L66 4 L55 6 L53 17 L51 6 L40 4 L51 2 Z"/>'
+            '</svg>'
+            f'<span class="brand-text"><span class="brand-word">{letters}</span>'
+            '<span class="brand-sub">Natursteine und Glas</span></span></span>')
+
+
+# Großes, ganz dezentes Facetten-Motiv aus dem Logo für den Hintergrund
+DECO = ('<svg class="deco" viewBox="0 0 105 97" aria-hidden="true" focusable="false">'
+        '<path pathLength="1" d="M53 4 L4 65 L20 93 L85 93 L101 65 Z"/><path pathLength="1" d="M20 93 L53 4 L85 93"/></svg>')
 
 
 ICON_PHONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>'
@@ -227,7 +247,7 @@ def footer():
     return f'''<footer class="footer"><div class="wrap">
 <div class="footer-grid">
   <div>
-    <a class="footer-logo" href="index.html">{img("logo.png", "Bäder Natursteine und Glas", folder="assets")}</a>
+    <a class="footer-logo" href="index.html" aria-label="Bäder Natursteine und Glas – Startseite">{logo("brand--dark")}</a>
     <p>{FIRMA}<br>In den Weiden 24<br>73776 Altbach</p>
     <p>Telefon <a href="tel:{TEL_LINK}">{TEL}</a><br>Fax {FAX}<br>E-Mail <a href="mailto:{MAIL}">{MAIL}</a></p>
   </div>
@@ -298,6 +318,8 @@ def layout(slug, title, desc, body):
 <link rel="manifest" href="manifest.json">
 <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/cormorant.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/michroma.woff2" as="font" type="font/woff2" crossorigin>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim');</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -308,7 +330,7 @@ def layout(slug, title, desc, body):
   <a class="hide-xs" href="mailto:{MAIL}">{MAIL}</a>
 </div></div>
 <header class="header"><div class="wrap">
-  <a class="logo" href="index.html" aria-label="Startseite">{img("logo.png", "Bäder Natursteine und Glas", lazy=False, folder="assets")}</a>
+  <a class="logo" href="index.html" aria-label="Bäder Natursteine und Glas – Startseite">{logo()}</a>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="hauptmenue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menü</span></button>
   <nav aria-label="Hauptmenü">{nav(slug)}</nav>
 </div></header>
