@@ -86,40 +86,59 @@
     });
   }
 
-  // Schnelle Hilfe
-  var answers = {
-    zeiten: '<b>Öffnungszeiten</b><br>Montag bis Mittwoch und Freitag: 8.00–12.20 Uhr und 13.00–17.00 Uhr<br>Donnerstag: 8.00–12.20 Uhr und 13.00–18.00 Uhr<br><br><b>Adresse</b><br>In den Weiden 24, 73776 Altbach<br><a href="kontakt-anfahrt.html">Anfahrt ansehen</a>',
-    materialien: '<b>Unsere Materialien</b><br>Über 70 Natursteinsorten am Lager, dazu Silestone, Lightstone, Neolith, Dekton, Laminam und Vetroplan-Glas.<br><a href="naturstein.html">Naturstein</a> · <a href="neolith-keramik.html">Keramik</a> · <a href="vetroplan-glasrueckfronten.html">Glas</a>',
-    preise: '<b>Preise</b><br>Unsere Preisliste 2025/26 mit Service-, Montage- und Liefertarifen finden Sie hier:<br><a href="download-preislisten.html">Zur Preisliste</a><br><br>Hinweis: Wir verkaufen ausschließlich an Gewerbekunden.',
-    kontakt: '<b>So erreichen Sie uns</b><br>Telefon: <a href="tel:+49715383130">07153 8313-0</a><br>E-Mail: <a href="mailto:info@natursteinwerk-baeder.de">info@natursteinwerk-baeder.de</a><br><a href="team.html">Alle Ansprechpartner</a>'
-  };
-  var labels = { zeiten: 'Öffnungszeiten', materialien: 'Materialien', preise: 'Preise', kontakt: 'Kontakt' };
+  // Geöffnet oder geschlossen? (Ortszeit Altbach)
+  var HOURS = { 1: [[480, 740], [780, 1020]], 2: [[480, 740], [780, 1020]], 3: [[480, 740], [780, 1020]],
+                4: [[480, 740], [780, 1080]], 5: [[480, 740], [780, 1020]] };
+  var DAYS = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+  function hm(m) { return Math.floor(m / 60) + '.' + String(m % 60).padStart(2, '0') + ' Uhr'; }
+  function openStatus() {
+    var p = {};
+    new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false })
+      .formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+    var day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday);
+    var now = (parseInt(p.hour, 10) % 24) * 60 + parseInt(p.minute, 10);
+    var today = HOURS[day] || [];
+    for (var i = 0; i < today.length; i++) {
+      if (now >= today[i][0] && now < today[i][1]) return { open: true, text: 'Jetzt geöffnet – bis ' + hm(today[i][1]) };
+      if (now < today[i][0]) return { open: false, text: (i ? 'Mittagspause – ab ' : 'Noch geschlossen – ab ') + hm(today[i][0]) };
+    }
+    for (var d = 1; d <= 7; d++) {
+      var nd = (day + d) % 7;
+      if (HOURS[nd]) return { open: false, text: 'Geschlossen – ' + (d === 1 ? 'morgen' : DAYS[nd]) + ' ab ' + hm(HOURS[nd][0][0]) };
+    }
+  }
+  var st = openStatus();
+  document.querySelectorAll('.open-status').forEach(function (el) {
+    el.textContent = st.text;
+    el.classList.add(st.open ? 'is-open' : 'is-closed');
+  });
+
+  // Wer ist zuständig?
   var helpBtn = document.querySelector('.help-btn');
   var help = document.querySelector('.help');
   if (helpBtn && help) {
-    var body = help.querySelector('.help-body');
-    function say(html, me) {
-      var m = document.createElement('div');
-      m.className = 'msg' + (me ? ' msg--me' : '');
-      m.innerHTML = html;
-      body.appendChild(m);
-      body.scrollTop = body.scrollHeight;
-    }
-    helpBtn.addEventListener('click', function () {
-      var open = help.classList.toggle('is-open');
-      helpBtn.setAttribute('aria-expanded', open);
-    });
-    help.querySelector('.help-head button').addEventListener('click', function () {
-      help.classList.remove('is-open');
-      helpBtn.setAttribute('aria-expanded', 'false');
-    });
-    help.querySelectorAll('.help-quick button').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var k = b.getAttribute('data-q');
-        say(labels[k], true);
-        setTimeout(function () { say(answers[k]); }, 250);
+    function showView(id) {
+      help.querySelectorAll('.hp-view').forEach(function (v) {
+        v.hidden = id ? v.id !== id : !v.classList.contains('hp-start');
       });
+      help.querySelector('.help-body').scrollTop = 0;
+      var first = help.querySelector('.hp-view:not([hidden]) button, .hp-view:not([hidden]) a');
+      if (id && first) first.focus();
+    }
+    function setOpen(open) {
+      help.classList.toggle('is-open', open);
+      helpBtn.setAttribute('aria-expanded', open);
+      if (!open) showView(null);
+    }
+    helpBtn.addEventListener('click', function () { setOpen(!help.classList.contains('is-open')); });
+    help.querySelector('.help-close').addEventListener('click', function () { setOpen(false); helpBtn.focus(); });
+    help.querySelectorAll('[data-topic]').forEach(function (b) {
+      b.addEventListener('click', function () { showView(b.getAttribute('data-topic')); });
     });
+    help.querySelectorAll('.hp-back').forEach(function (b) {
+      b.addEventListener('click', function () { showView(null); });
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
   }
 
   // ------------------------------------------------ Bewegung

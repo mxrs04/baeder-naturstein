@@ -28,6 +28,10 @@ YOUTUBE_ID = "hvYI4MGJVQc"
 
 def img_size(path):
     """Breite/Höhe von JPG/PNG lesen (ohne Zusatzpakete)."""
+    if path.endswith(".svg"):
+        import re
+        vb = re.search(r'viewBox="[\d.\s-]*?([\d.]+)\s+([\d.]+)"', open(path, encoding="utf-8").read())
+        return round(float(vb.group(1))), round(float(vb.group(2)))
     with open(path, "rb") as f:
         head = f.read(26)
         if head[:8] == b"\x89PNG\r\n\x1a\n":
@@ -142,7 +146,8 @@ def subnav(items, active):
 
 def tile(href, image, title, text, more="Mehr erfahren", banner=False):
     cls = "tile tile--banner" if banner else "tile"
-    return (f'<a class="{cls}" href="{href}"><div class="photo">{img(image, "")}</div>'
+    pic = vp_mark(image) if banner else img(image, "")
+    return (f'<a class="{cls}" href="{href}"><div class="photo">{pic}</div>'
             f'<div class="tile-body"><h3>{title}</h3><p>{text}</p><span class="link-arrow">{more}</span></div></a>')
 
 
@@ -289,17 +294,59 @@ def footer():
 </div></footer>'''
 
 
-HELP = f'''<button class="help-btn" type="button" aria-expanded="false" aria-controls="hilfe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Schnelle Hilfe</span></button>
-<div class="help" id="hilfe" role="dialog" aria-label="Schnelle Hilfe">
-  <div class="help-head"><div><b>Bäder Assistenz</b><small>Schnelle Antworten</small></div><button type="button" aria-label="Schließen">×</button></div>
-  <div class="help-body"><div class="msg">Guten Tag! Willkommen bei Bäder Natursteine und Glas. Wobei können wir helfen? Tippen Sie auf ein Thema.</div></div>
-  <div class="help-quick">
-    <button type="button" data-q="zeiten">Öffnungszeiten</button>
-    <button type="button" data-q="materialien">Materialien</button>
-    <button type="button" data-q="preise">Preise</button>
-    <button type="button" data-q="kontakt">Kontakt</button>
+# „Wer ist zuständig?“ – führt in zwei Klicks zur richtigen Person (Daten aus TEAM)
+HELP_TOPICS = [
+    ("Angebot anfragen", ["Angebote"]),
+    ("Frage zu Naturstein &amp; Keramik", ["Technik Stein"]),
+    ("Frage zu Glasrückwänden", ["Technik Glas"]),
+    ("Aufmaß vor Ort", ["Aufmaß"]),
+    ("Lieferung &amp; Termine", ["Disposition"]),
+    ("Eigenes Motiv auf Glas (Digitaldruck)", ["Digitaldruck", ("Gerd Hofmann", "beantwortet Fragen zum Digitalprint")]),
+    ("Ausstellung besuchen", [("Issa Sabokrouh", "Kundenberater – Termin per E-Mail")]),
+    ("Rechnung &amp; Buchhaltung", ["Buchhaltung"]),
+    ("Außendienst", ["Außendienst"]),
+    ("Geschäftsleitung", ["Geschäftsleitung"]),
+]
+EXTRA_PEOPLE = {"Issa Sabokrouh": ([], "issa-sabokrouh"), "Gerd Hofmann": (["07153 8313-27", "Mobil 01520 5360590"], "gerd-hofmann")}
+
+
+def help_person(name, phones, mail, role):
+    calls = "".join(f'<a class="hp-btn" href="tel:+49{"".join(c for c in p if c.isdigit())[1:]}">{ICON_PHONE}{p}</a>' for p in phones)
+    m = f'<a class="hp-btn hp-btn--ghost" href="mailto:{mail}@natursteinwerk-baeder.de">{ICON_MAIL}E-Mail schreiben</a>' if mail else ""
+    return f'<div class="hp-person"><b>{name}</b><span>{role}</span><div class="hp-actions">{calls}{m}</div></div>'
+
+
+def help_panel():
+    groups = {g: people for g, people in TEAM}
+    topics, views = "", ""
+    for i, (title, refs) in enumerate(HELP_TOPICS):
+        people = ""
+        for ref in refs:
+            if isinstance(ref, tuple):
+                phones, mail = EXTRA_PEOPLE[ref[0]]
+                people += help_person(ref[0], phones, mail, ref[1])
+            else:
+                for name, phones, mail in groups[ref]:
+                    if "†" not in name:
+                        people += help_person(name, phones, mail, ref)
+        topics += f'<li><button type="button" data-topic="t{i}">{title}<span aria-hidden="true">›</span></button></li>'
+        views += f'<div class="hp-view" id="t{i}" hidden><button type="button" class="hp-back">‹ Zurück</button><h3>{title}</h3>{people}</div>'
+    return f'''<button class="help-btn" type="button" aria-expanded="false" aria-controls="hilfe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>Wer ist zuständig?</span></button>
+<div class="help" id="hilfe" role="dialog" aria-label="Wer ist zuständig?">
+  <div class="help-head"><div><b>Wer ist zuständig?</b><small class="open-status" data-long>Öffnungszeiten werden geprüft …</small></div><button type="button" class="help-close" aria-label="Schließen">×</button></div>
+  <div class="help-body">
+    <div class="hp-view hp-start"><p class="muted">Wählen Sie Ihr Anliegen – wir zeigen Ihnen direkt die richtige Person.</p><ul class="hp-topics">{topics}</ul></div>
+    {views}
   </div>
+  <div class="help-foot"><a class="btn" href="tel:{TEL_LINK}">{ICON_PHONE}Zentrale anrufen: 07153 8313-0</a><a class="link-arrow" href="team.html">Alle Ansprechpartner</a></div>
 </div>'''
+
+
+def version(name):
+    """Kurzer Fingerabdruck der Datei: Browser laden nach Änderungen sicher die neue Fassung."""
+    import hashlib
+    with open(os.path.join(ROOT, name), "rb") as f:
+        return hashlib.md5(f.read()).hexdigest()[:8]
 
 
 def layout(slug, title, desc, body):
@@ -320,12 +367,12 @@ def layout(slug, title, desc, body):
 <link rel="preload" href="assets/fonts/cormorant.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/michroma.woff2" as="font" type="font/woff2" crossorigin>
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim');</script>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v={version("style.css")}">
 </head>
 <body>
 <a class="sr-skip" href="#inhalt" style="position:absolute;left:-9999px">Zum Inhalt springen</a>
 <div class="topbar"><div class="wrap">
-  <span class="hide-sm">Mo–Mi &amp; Fr 8.00–17.00 Uhr · Do bis 18.00 Uhr</span>
+  <span class="hide-sm open-status">Mo–Mi &amp; Fr 8.00–17.00 Uhr · Do bis 18.00 Uhr</span>
   <a href="tel:{TEL_LINK}">Tel. 07153 8313-0</a>
   <a class="hide-xs" href="mailto:{MAIL}">{MAIL}</a>
 </div></div>
@@ -338,8 +385,8 @@ def layout(slug, title, desc, body):
 {body}
 </main>
 {footer()}
-{HELP}
-<script src="main.js" defer></script>
+{help_panel()}
+<script src="main.js?v={version("main.js")}" defer></script>
 </body>
 </html>
 '''
@@ -439,11 +486,11 @@ def p_index():
         + section(
             head("Unsere Marken", "Erstklassige Glasprodukte aus Altbach", center=True)
             + '<div class="grid grid-2">'
-            f'<div class="card"><div style="height:90px;display:flex;align-items:center">{img("home-08.png", "Vetroplan – Die Profis in Sachen Glas", "logo-img")}</div>'
+            f'<div class="card"><div style="height:90px;display:flex;align-items:center">{img("logos/home-08.png", "Vetroplan – Die Profis in Sachen Glas", "logo-img")}</div>'
             '<h3>Die Glas-Alternative: Die Individualität nahezu ohne Grenzen Ihrer Kreativität</h3>'
             '<p>VETROPLAN ist eine Marke aus unserem Hause und Ihr Partner für Nischenrückfronten aus Glas. Überzeugen Sie sich und Ihre Familie von dem faszinierenden Element Glas – Sie werden sehen, dass Sie auf dessen Schönheit und Komfort nicht mehr verzichten möchten.</p>'
             + btns(btn("Zu VETROPLAN", "https://www.vetroplan.com/", ext=True), btn("Glasrückfronten ansehen", "vetroplan-glasrueckfronten.html", "ghost")) + '</div>'
-            f'<div class="card"><div style="height:90px;display:flex;align-items:center">{img("home-09.jpg", "Culina Luce", "logo-img")}</div>'
+            f'<div class="card"><div style="height:90px;display:flex;align-items:center">{img("logos/home-09.png", "Culina Luce", "logo-img")}</div>'
             '<h3>LED-Lichtfelder aus Glas für ein entspanntes Wohngefühl in Küche oder Bad</h3>'
             '<p>CULINA LUCE ist unsere Marke, wenn es um LED-Lichtfelder für unterschiedlichste Anwendungsbereiche geht. Von Küchenrückwänden über Wand- und Badfelder bis hin zu Küchenarbeitsplatten oder ganz individuellen Anfertigungen – beleuchtet oder unbeleuchtet.</p>'
             + btns(btn("Zu CULINA LUCE", "https://www.culina-luce.de/", ext=True)) + '</div>'
@@ -583,7 +630,7 @@ def p_lightstone():
         page_head([("Startseite", "index.html"), ("Naturstein &amp; Keramik", None)], "Küchenarbeitsplatten für Stuttgart und Umgebung")
         + section(
             '<div class="split">'
-            f'<div>{img("lightstone-02.jpg", "Lightstone – The Lightning Solution", "logo-img")}<p class="lead" style="margin-top:24px">Lightstone ist ein qualitatives Quarzkompositmaterial, das zur Produktion von Küchenarbeitsplatten verwendet wird.</p>'
+            f'<div>{img("logos/lightstone-02.png", "Lightstone – The Lightning Solution", "logo-img")}<p class="lead" style="margin-top:24px">Lightstone ist ein qualitatives Quarzkompositmaterial, das zur Produktion von Küchenarbeitsplatten verwendet wird.</p>'
             '<p>Die Grundlage für dieses hochwertig hergestellte Material sind sorgfältig ausgewählte Rohstoffe, wie zum Beispiel Quarz oder natürliche Farbpigmente. Küchenarbeitsplatten aus Lightstone erhalten Sie <b>exklusiv bei uns in Altbach</b> nahe Stuttgart in 12 mm Materialstärke.</p></div>'
             f'<div>{figure("lightstone-10.jpg", "Arbeitsplattendekor Dalia Nube", extra="photo--wide")}</div>'
             '</div>', "section--tight")
@@ -608,7 +655,7 @@ def p_lightstone():
             '</div>', "section--white", "farben")
         + section(
             '<div class="split"><div><h2>Zertifizierte Sicherheit</h2><p>Lightstone Quarzarbeitsplatten erfüllen schon heute die modernsten und sicherheitsrelevantesten Anforderungen und haben dadurch folgende Zertifikate:</p></div>'
-            f'<div class="grid grid-2"><div class="framed">{img("lightstone-14.jpg", "NSF-Zertifikat")}</div><div class="framed">{img("lightstone-15.jpg", "GREENGUARD Indoor Air Quality Certified")}</div></div></div>')
+            f'<div class="cert-row">{img("logos/lightstone-14.png", "NSF-Zertifikat", "cert")}{img("logos/lightstone-15.png", "GREENGUARD Indoor Air Quality Certified", "cert")}</div></div>')
         + cta()
     )
 
@@ -634,7 +681,7 @@ def p_neolith():
         page_head([("Startseite", "index.html"), ("Naturstein &amp; Keramik", None)], "Küchenarbeitsplatten aus Keramik")
         + section(
             '<div class="split">'
-            f'<div>{img("neolith-keramik-02.jpg", "Neolith by TheSize", "logo-img")}'
+            f'<div>{img("logos/neolith.svg", "Neolith", "logo-img logo-img--svg")}'
             '<p class="lead" style="margin-top:24px">Bei NEOLITH handelt es sich um die größte Hightech-Keramik-Platte weltweit.</p>'
             '<p>Besonders in Küche, Bad und Wohnraum geht der Trend immer mehr hin zu großformatigen Fliesen, was NEOLITH so beliebt bei unseren Kunden aus dem Raum Stuttgart macht.</p>'
             '<p>Hergestellt wird die Keramik aus natürlichen, sorgfältig ausgewählten Rohstoffen, wie zum Beispiel Quarzsand, Mineralien, Feldspat oder Tonerde.</p>'
@@ -668,7 +715,7 @@ def p_neolith():
             '<li><b>12 mm</b><span>Das Tafelmaß der Rohtafeln aus Keramik bei 12 mm Materialstärke beträgt 320 x 150 cm.</span></li>'
             '<li><b>Oberfläche</b><span>Keramik-Oberflächen sind rau.</span></li></ul></div>'
             '<div><h3>Sicherheitszertifikate</h3><p>Wie auch Lightstone erfüllt Neolith Keramik heute schon die modernsten und sicherheitsrelevantesten Anforderungen und hat dadurch folgende Zertifikate:</p>'
-            f'<div class="framed">{img("neolith-keramik-26.jpg", "U.S. Green Building Council Member und GREENGUARD Indoor Air Quality Certified")}</div></div>'
+            f'<div class="cert-row">{img("logos/neolith-keramik-26.png", "U.S. Green Building Council Member und GREENGUARD Indoor Air Quality Certified", "cert cert--wide")}</div></div>'
             '</div>', "section--white")
         + section('<div class="narrow">' + technik(
             [P5, P6, "<b>Profil 5:</b> Oberseite und Unterseite mit Fasen 3 mm.", P9],
@@ -738,7 +785,7 @@ def p_laminam():
         page_head([("Startseite", "index.html"), ("Naturstein &amp; Keramik", None)], "Keramikarbeitsplatten für Ihre Küche")
         + section(
             '<div class="split">'
-            f'<div>{img("laminam-01.jpg", "Laminam – Superior Natural Surfaces", "logo-img")}'
+            f'<div>{img("logos/laminam.svg", "Laminam – Superior Natural Surfaces", "logo-img logo-img--svg")}'
             '<p class="lead" style="margin-top:24px">Keramikplatten von Laminam sind kein Mainstream-Produkt. Hier ist jede Oberfläche ein Unikat!</p>'
             '<p>Die Dekore stehen in den Stärken 5 mm, 12 mm und 20 mm für Sie zur Auswahl.</p>'
             '<p>Die innovativen Oberflächen bieten für jeden Geschmack, jedes Interieur und jeden Kunden die passende Wahl. Die erhältlichen Kollektionen spiegeln die aktuellen Einrichtungstrends ebenso wider wie exklusive Klassiker.</p>'
@@ -773,20 +820,34 @@ VP_LINES = [
 ]
 
 
-def vp_head(slug, banner, title):
+VP_COLORS = {"basic": ("BASIC-LINE", "#4f7392", ""), "trend": ("TREND-LINE", "#8576c4", "i"),
+             "steel": ("STEEL ART - LINE", "#9a8f4f", ""), "digital": ("DIGITAL PRINT - LINE", "#2e9a5e", ""),
+             "life": ("LIFE-LINE", "#d3262b", "i")}
+
+
+def vp_mark(line, big=False):
+    """Vetroplan-Wortmarke (scharf) mit dem Namen der Linie als echter Text."""
+    name, color, style = VP_COLORS[line]
+    cls = "vp-mark vp-mark--big" if big else "vp-mark"
+    st = " vp-line--i" if style else ""
+    return (f'<span class="{cls}">{img("logos/vetroplan-wort.png", "Vetroplan")}'
+            f'<span class="vp-line{st}" style="color:{color}">{name}</span></span>')
+
+
+def vp_head(slug, line, title):
     return (page_head([("Startseite", "index.html"), ("Vetroplan Glasrückfronten", "vetroplan-glasrueckfronten.html")], title)
-            .replace("</div></section>", f'<div style="margin-top:20px;max-width:420px">{img(banner, title)}</div>{subnav(VP_LINES, slug)}</div></section>'))
+            .replace("</div></section>", f'<div style="margin-top:22px">{vp_mark(line, True)}</div>{subnav(VP_LINES, slug)}</div></section>'))
 
 
 @page("vetroplan-glasrueckfronten.html", "Vetroplan Glasrückfronten – moderne Wandverkleidungen aus Glas",
       "Mit den modernen Glasrückfronten von Vetroplan verleihen Sie Ihrer Traumküche einen ganz besonderen Touch! Lassen Sie sich beraten.")
 def p_vetroplan():
     lines = [
-        ("vetroplan-basic-line.html", "vp-03.jpg", "Basic Line", "Die wichtigsten Grundfarben in 6 bis 12 mm und vielen Oberflächen."),
-        ("vetroplan-trend-line.html", "vp-04.jpg", "Trend Line", "Junge, frische Farbtöne – abgestimmt auf die Küchentrends."),
-        ("vetroplan-steel-art-line.html", "vp-05.jpg", "Steel Art Line", "Metallische Farbtöne passend zu Griffen und Blenden."),
-        ("vetroplan-digital-print-line.html", "vp-06.jpg", "Digital Print Line", "Ihr Wunschmotiv – auf Glas gedruckt."),
-        ("vetroplan-life-line.html", "vp-07.jpg", "Life Line", "Neu ab 2014: 6 Grundfarbtöne im Einstiegssegment."),
+        ("vetroplan-basic-line.html", "basic", "Basic Line", "Die wichtigsten Grundfarben in 6 bis 12 mm und vielen Oberflächen."),
+        ("vetroplan-trend-line.html", "trend", "Trend Line", "Junge, frische Farbtöne – abgestimmt auf die Küchentrends."),
+        ("vetroplan-steel-art-line.html", "steel", "Steel Art Line", "Metallische Farbtöne passend zu Griffen und Blenden."),
+        ("vetroplan-digital-print-line.html", "digital", "Digital Print Line", "Ihr Wunschmotiv – auf Glas gedruckt."),
+        ("vetroplan-life-line.html", "life", "Life Line", "Neu ab 2014: 6 Grundfarbtöne im Einstiegssegment."),
     ]
     return (
         hero("vp-08.jpg", "Glas", "Moderne Wandverkleidungen aus Glas von Vetroplan",
@@ -794,7 +855,7 @@ def p_vetroplan():
              f'<div style="margin-top:26px">{subnav(VP_LINES, "vetroplan-glasrueckfronten.html")}</div>', small=False)
         + section(
             '<div class="split">'
-            f'<div>{img("vp-01.jpg", "Vetroplan – Die Profis in Sachen Glas", "logo-img")}'
+            f'<div>{img("logos/vp-01.png", "Vetroplan – Die Profis in Sachen Glas", "logo-img")}'
             '<p class="lead" style="margin-top:24px">Mit den modernen Glasrückfronten von <a href="https://www.vetroplan.com/" target="_blank" rel="noopener">Vetroplan</a> verleihen Sie Ihrer Traumküche einen ganz speziellen Touch!</p>'
             '<p>Im Gegensatz zu herkömmlichen Fliesen wird das lackierte Glas an die vorhandenen Gegebenheiten angepasst. Das Ergebnis ist eine hochwertige, sehr hygienische Wandverkleidung aus angepassten großen Elementteilen. Unsere <a href="team.html">Experten</a> aus Altbach bei Stuttgart beraten Sie gerne persönlich!</p></div>'
             f'<div>{photo("vp-09.jpg", "Küche mit Vetroplan Glasrückwand", "photo--wide")}</div>'
@@ -804,7 +865,7 @@ def p_vetroplan():
             '<div><h2>Wandverkleidungen aus Glas – Ihre Profis nahe Stuttgart</h2>'
             '<p>Die Vetroplan Glasprodukte können auf unterschiedlichste Art im Innenausbau verwendet werden, zum Beispiel für Glasrückfronten im Küchenbereich, Arbeitsplatten, Thekenkonstruktionen und vieles mehr. Dabei haben Sie die Möglichkeit, die Wandverkleidung individuell in Farbe, Glasstärke und Oberflächenstruktur anzupassen und Ihren Räumlichkeiten somit eine einzigartige Note zu verleihen.</p>'
             '<p>Die Glasrückfronten von Vetroplan sind die einzigen, die serienmäßig als ESG-Sicherheitsglas verarbeitet und somit als Nischenrückfronten im Küchenbereich eingebaut werden können. Denn nur das standardmäßige Sicherheitsglas hält den thermischen und mechanischen Ansprüchen einer Küche (heiße Kochtöpfe, Stöße etc.) stand. <b>Aufgrund unserer langjährigen Erfahrung empfehlen wir Ihnen daher, von nicht vorgespanntem Glas abzusehen!</b></p></div>'
-            f'<div style="max-width:340px;margin:0 auto">{img("vp-02.jpg", "Qualität: serienmäßig ESG-Glas")}</div>'
+            f'<div style="max-width:340px;margin:0 auto">{img("logos/vp-02.png", "Qualität: serienmäßig ESG-Glas")}</div>'
             '</div>', "section--white")
         + section(head("Die Vetroplan-Linien", "Glasrückfronten – gerne auch nach Heidelberg",
                        "In der Nähe von Heidelberg bieten wir Ihnen die Rückfronten in verschiedenen Ausführungen an. Wählen Sie Ihren Favoriten und erleben Sie die zahlreichen kreativen Gestaltungsmöglichkeiten mit Vetroplan!")
@@ -825,7 +886,7 @@ def p_basic():
              "B-160 Silent Blue", "B-161 Intense Blue", "B-170 Smooth Grey", "B-171 Platin Grey", "B-172 Intense Grey", "B-180 Concept Black", "B-181 Absolute Black"]
     sw = [(f"vp-vetroplan-basic-line-{i + 11:02d}.jpg", n) for i, n in enumerate(names)]
     return (
-        vp_head("vetroplan-basic-line.html", "vp-vetroplan-basic-line-01.jpg", "Vetroplan Basic Line")
+        vp_head("vetroplan-basic-line.html", "basic", "Vetroplan Basic Line")
         + section(
             '<div class="split">'
             '<div><p class="lead">Die Vetroplan Basic Line enthält die wichtigsten Grundfarben.</p>'
@@ -845,7 +906,7 @@ def p_trend():
              "T-440 Concept Orange", "T-450 Silent Petrol", "T-451 Intense Petrol", "T-460 Active Blue", "T-470 Silent Violett"]
     sw = [(f"vp-vetroplan-trend-line-{i + 7:02d}.jpg", n) for i, n in enumerate(names)]
     return (
-        vp_head("vetroplan-trend-line.html", "vp-vetroplan-trend-line-01.jpg", "Vetroplan Trend Line")
+        vp_head("vetroplan-trend-line.html", "trend", "Vetroplan Trend Line")
         + section(
             '<div class="split">'
             '<div><p class="lead">Die Vetroplan Trend Line – das sind junge, frische und moderne Farbtöne, abgestimmt auf die neuesten Trends der Küchenhersteller.</p>'
@@ -864,7 +925,7 @@ def p_steel():
     names = ["S-210 Rich Silver", "S-211 Sensitive Silver", "S-220 Absolute Metallic", "S-221 Sensitive Metallic", "S-230 Rich Bronze", "S-231 Intense Bronze", "S-240 Bright Taupe"]
     sw = [(f"vp-vetroplan-steel-art-line-{i + 2:02d}.jpg", n) for i, n in enumerate(names)]
     return (
-        vp_head("vetroplan-steel-art-line.html", "vp-vetroplan-steel-art-line-01.jpg", "Vetroplan Steel Art Line")
+        vp_head("vetroplan-steel-art-line.html", "steel", "Vetroplan Steel Art Line")
         + section(
             '<div class="narrow"><p class="lead">Die Vetroplan Steel Art Line – das sind metallische Farbtöne, die Sie in Verbindung mit anderen metallischen Elementen, wie z. B. Griffen oder Blenden, verwenden können.</p>'
             '<p>Sie haben zudem die Möglichkeit, Ihren gewünschten Farbton auf unterschiedliche Materialstärken (6, 8, 10 und 12 mm) zu wählen.</p>'
@@ -880,7 +941,7 @@ def p_life():
     names = ["L-510 White on Float", "L-511 Grey on Float", "L-520 Beige on Float", "L-521 Brown on Float", "L-530 Orange on Float", "T-531 Red on Float"]
     sw = [(f"vp-vetroplan-life-line-{i + 3:02d}.jpg", n) for i, n in enumerate(names)]
     return (
-        vp_head("vetroplan-life-line.html", "vp-vetroplan-life-line-01.jpg", "Vetroplan Life Line")
+        vp_head("vetroplan-life-line.html", "life", "Vetroplan Life Line")
         + section(
             '<div class="split">'
             '<div><span class="eyebrow">Neu ab 2014</span><p class="lead">Die Vetroplan Life Line: 6 Grundfarbtöne im Einstiegssegment auf Floatglasbasis.</p>'
@@ -896,7 +957,7 @@ def p_life():
       "Setzen Sie individuelle Akzente in Ihrer Küche und lassen Sie Ihre Küchenfront bei uns in Altbach mit Ihrem Wunschmotiv bedrucken!")
 def p_digital():
     return (
-        vp_head("vetroplan-digital-print-line.html", "vp-vetroplan-digital-print-line-01.jpg", "Vetroplan Digital Print Line")
+        vp_head("vetroplan-digital-print-line.html", "digital", "Vetroplan Digital Print Line")
         + section(
             '<div class="split split--top">'
             '<div><p class="lead">Auf Kundenwunsch bedrucken wir Ihre Glasrückfront mit Motiven Ihrer Wahl.</p>'
